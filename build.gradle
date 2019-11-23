@@ -11,6 +11,5 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.sat4j', name: 'org.sat4j.pb', version: '2.3.1'
 }
