@@ -21,3 +21,14 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.bin
+.gradle/4.10.1/fileHashes/fileHashes.lock
+
+# Ignore all .idea files
+*.idea
+
+# Ignore all .bin files
+*.bin
+
+# Ignore all .gradle files
+*.gradle
