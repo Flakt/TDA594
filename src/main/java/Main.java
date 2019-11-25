@@ -1,11 +1,9 @@
+import org.sat4j.core.VecInt;
 import org.sat4j.pb.SolverFactory;
 import org.sat4j.reader.DimacsReader;
 import org.sat4j.reader.ParseFormatException;
 import org.sat4j.reader.Reader;
-import org.sat4j.specs.ContradictionException;
-import org.sat4j.specs.IProblem;
-import org.sat4j.specs.ISolver;
-import org.sat4j.specs.TimeoutException;
+import org.sat4j.specs.*;
 
 import java.io.*;
 import java.util.HashMap;
@@ -19,10 +17,8 @@ public class Main {
         Reader reader = new DimacsReader(solver);
         PrintWriter out = new PrintWriter(System.out,true);
 
-        //To run the program you will have to either add a configuration so that you can run main with arguments,
-        // or replace the filepath variable with your own filepath. Do not push your own filepath
         // CNF filename is given on the command line (their comment)
-        String filePath = args[0];
+        String filePath = "src/main/resources/ecos_x86.dimacs";
 
         try {
             IProblem problem = reader.parseInstance(filePath);
@@ -33,10 +29,11 @@ public class Main {
                 Map<Integer,String> features = getFeatures(problem,filePath);
                 System.out.println("Number of features: " + features.size());
 
-                Map<Integer,String> deadFeatures = getDeadFeatures(features);
-                /*for (Integer key:deadFeatures.keySet()) {
+                Map<Integer,String> deadFeatures = getDeadFeatures(problem, features);
+                System.out.println("Number of dead features: " + deadFeatures.size());
+                for (Integer key:deadFeatures.keySet()) {
                     System.out.println(key + ": " + deadFeatures.get(key));
-                }*/
+                }
 
                 //TODO Create a method that returns the number of implications and dumps them all in a file
 
@@ -87,11 +84,22 @@ public class Main {
     }
 
     //TODO Create method that returns a map of dead features
-    private static Map<Integer,String> getDeadFeatures(Map<Integer,String> features){
+    private static Map<Integer,String> getDeadFeatures(IProblem problem,Map<Integer,String> features)
+            throws TimeoutException {
 
-        Map<Integer,String> deadFeautures;
+        Map<Integer,String> deadFeautures = new HashMap<>();
 
-        return null;
+        for (Integer key: features.keySet()) {
+
+            IVecInt value = new VecInt();
+            value.insertFirst(key);
+
+            if(!problem.isSatisfiable(value)){
+                deadFeautures.put(key,features.get(key));
+            }
+        }
+
+        return deadFeautures;
     }
 
 }
