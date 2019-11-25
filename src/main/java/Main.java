@@ -6,7 +6,9 @@ import org.sat4j.reader.Reader;
 import org.sat4j.specs.*;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -36,6 +38,7 @@ public class Main {
                 }
 
                 //TODO Create a method that returns the number of implications and dumps them all in a file
+                System.out.println("Number of implications: " + getNbrOfImplicationsAndCreateFile(problem, features));
 
             } else {
                 System.out.println("Unsatisfiable !");
@@ -100,6 +103,29 @@ public class Main {
         }
 
         return deadFeautures;
+    }
+
+    private static int getNbrOfImplicationsAndCreateFile(IProblem problem, Map<Integer,String> features)
+            throws TimeoutException {
+
+        List<String> implications = new ArrayList<>();
+        int amount = 0;
+
+        //Checks if A implies B ((not A) or B)
+        for (Integer A: features.keySet()) {
+            for (Integer B: features.keySet()) {
+                IVecInt value = new VecInt();
+
+                value.insertFirst(B);
+                value.insertFirst(-A);
+
+                if(!problem.isSatisfiable(value)){
+                    amount++;
+                }
+            }
+        }
+
+        return amount;
     }
 
 }
