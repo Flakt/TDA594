@@ -17,7 +17,6 @@ public class Main {
         ISolver solver = SolverFactory.newDefault();
         solver.setTimeout(3600); // 1 hour timeout
         Reader reader = new DimacsReader(solver);
-
         String filePath = "src/main/resources/ecos_x86.dimacs";
 
         try {
@@ -46,37 +45,28 @@ public class Main {
         } catch (TimeoutException e) {
             System.out.println("Timeout, sorry!");
         }
-
     }
 
-    //TODO improve this method. Works correctly, but is very inefficient
-    private static Map<Integer,String> getFeatures(IProblem problem, String filepath){
+    private static Map<Integer,String> getFeatures(IProblem problem, String filepath) throws IOException {
 
         Map<Integer,String> map = new HashMap<>();
+        FileReader fr = new FileReader(filepath);
+        BufferedReader br = new BufferedReader(fr);
 
-        try {
-            FileReader fr = new FileReader(filepath);
+        while(true){
+            String row = br.readLine();
+            if(row.charAt(0) != 'c') break;
+            row = row.substring(2);
+            int space = row.indexOf(" ");
+            Integer number = Integer.valueOf(row.substring(0,space));
+            String name = row.substring(space+1);
 
-            BufferedReader br = new BufferedReader(fr);
-
-            while(true){
-                String row = br.readLine();
-                if(row.charAt(0) != 'c') break;
-                row = row.substring(2);
-                int space = row.indexOf(" ");
-                Integer number = Integer.valueOf(row.substring(0,space));
-                String name = row.substring(space+1);
-
-                map.put(number,name);
-            }
-
-        } catch (IOException e) {
-           return null;
+            map.put(number,name);
         }
+
         return map;
     }
 
-    //TODO Create method that returns a map of dead features
     private static Map<Integer,String> getDeadFeatures(IProblem problem,Map<Integer,String> features)
             throws TimeoutException {
 
@@ -91,7 +81,6 @@ public class Main {
                 deadFeatures.put(key,features.get(key));
             }
         }
-
         return deadFeatures;
     }
 
@@ -106,7 +95,6 @@ public class Main {
         IVecInt trueB;
 
         //Checks if A implies B by testing the truth table
-
         for (Integer A: features.keySet()) {
             for (Integer B: features.keySet()) {
                 bothTrue = new VecInt();
