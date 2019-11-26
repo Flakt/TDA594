@@ -1,3 +1,4 @@
+import org.sat4j.core.Vec;
 import org.sat4j.core.VecInt;
 import org.sat4j.pb.SolverFactory;
 import org.sat4j.reader.DimacsReader;
@@ -6,6 +7,9 @@ import org.sat4j.reader.Reader;
 import org.sat4j.specs.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +42,7 @@ public class Main {
                 }
 
                 //TODO Create a method that returns the number of implications and dumps them all in a file
-                System.out.println("Number of implications: " + getNbrOfImplicationsAndCreateFile(problem, features));
+                System.out.println("Number of implications: " + getNbrOfImplicationsAndCreateFile(problem, features,filePath));
 
             } else {
                 System.out.println("Unsatisfiable !");
@@ -90,7 +94,7 @@ public class Main {
     private static Map<Integer,String> getDeadFeatures(IProblem problem,Map<Integer,String> features)
             throws TimeoutException {
 
-        Map<Integer,String> deadFeautures = new HashMap<>();
+        Map<Integer,String> deadFeatures = new HashMap<>();
 
         for (Integer key: features.keySet()) {
 
@@ -98,29 +102,58 @@ public class Main {
             value.insertFirst(key);
 
             if(!problem.isSatisfiable(value)){
-                deadFeautures.put(key,features.get(key));
+                deadFeatures.put(key,features.get(key));
             }
         }
 
-        return deadFeautures;
+        return deadFeatures;
     }
 
-    private static int getNbrOfImplicationsAndCreateFile(IProblem problem, Map<Integer,String> features)
+    private static int getNbrOfImplicationsAndCreateFile(IProblem problem, Map<Integer,String> features, String filepath)
             throws TimeoutException {
 
         List<String> implications = new ArrayList<>();
         int amount = 0;
+        List<String> rows = new ArrayList<>();
+
+        try {
+            rows = Files.readAllLines(Paths.get(filepath), StandardCharsets.UTF_8);
+            rows.removeIf(n -> n.charAt(0) == 'c');
+        }catch (FileNotFoundException e) {
+            return -1;
+        } catch (IOException e) {
+            return -1;
+        }
+
 
         //Checks if A implies B ((not A) or B)
         for (Integer A: features.keySet()) {
             for (Integer B: features.keySet()) {
-                IVecInt value = new VecInt();
 
-                value.insertFirst(B);
-                value.insertFirst(-A);
+                if(!A.equals(B)) {
 
-                if(!problem.isSatisfiable(value)){
-                    amount++;
+                    /*IVecInt value = new VecInt();
+
+                    value.insertFirst(B);
+                    value.insertFirst(-A);
+
+                    if (!problem.isSatisfiable(value)) {
+                        System.out.println(value.toString());
+                        amount++;
+                    }*/
+
+                    String targetOne = -A + " " + B + " " + 0;
+                    String targetTwo = B + " " + -A + " " + 0;
+
+                    for (String row: rows) {
+
+                        if (row.equals(targetOne) || row.equals(targetTwo)) {
+                            implications.add(features.get(A) + " -> " + features.get(B));
+                            amount++;
+                        }
+
+                    }
+
                 }
             }
         }
