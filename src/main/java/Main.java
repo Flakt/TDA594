@@ -17,17 +17,14 @@ public class Main {
         ISolver solver = SolverFactory.newDefault();
         solver.setTimeout(3600); // 1 hour timeout
         Reader reader = new DimacsReader(solver);
-        PrintWriter out = new PrintWriter(System.out,true);
 
-        // CNF filename is given on the command line (their comment)
         String filePath = "src/main/resources/ecos_x86.dimacs";
 
         try {
             IProblem problem = reader.parseInstance(filePath);
             if (problem.isSatisfiable()) {
                 System.out.println("Satisfiable !");
-                reader.decode(problem.model(),out);
-                //System.out.println("Number of dead features: " + getDeadFeatures(problem, filePath));
+
                 Map<Integer,String> features = getFeatures(problem,filePath);
                 System.out.println("Number of features: " + features.size());
 
@@ -37,17 +34,12 @@ public class Main {
                     System.out.println(key + ": " + deadFeatures.get(key));
                 }
 
-                //TODO Create a method that returns the number of implications and dumps them all in a file
                 System.out.println("Number of implications: " + getNbrOfImplicationsAndCreateFile(problem, features));
 
             } else {
                 System.out.println("Unsatisfiable !");
             }
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-        } catch (ParseFormatException e) {
-            // TODO Auto-generated catch block
-        } catch (IOException e) {
+        } catch (ParseFormatException | IOException e) {
             // TODO Auto-generated catch block
         } catch (ContradictionException e) {
             System.out.println("Unsatisfiable (trivial)!");
@@ -78,10 +70,8 @@ public class Main {
                 map.put(number,name);
             }
 
-        }catch (FileNotFoundException e) {
-           return null;
         } catch (IOException e) {
-            return null;
+           return null;
         }
         return map;
     }
