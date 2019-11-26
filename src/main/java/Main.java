@@ -135,8 +135,8 @@ public class Main {
                 trueB.insertFirst(B);
                 trueB.insertFirst(-A);
 
-                if(problem.isSatisfiable(bothTrue) && problem.isSatisfiable(bothFalse) && problem.isSatisfiable(trueB)
-                && !problem.isSatisfiable(trueA)){
+                if(!problem.isSatisfiable(trueA) && problem.isSatisfiable(trueB) &&
+                        problem.isSatisfiable(bothTrue) && problem.isSatisfiable(bothFalse)){
                     amount++;
                     implications.add(features.get(A) + " -> " + features.get(B));
                 }
