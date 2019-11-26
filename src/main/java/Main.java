@@ -90,7 +90,7 @@ public class Main {
     private static Map<Integer,String> getDeadFeatures(IProblem problem,Map<Integer,String> features)
             throws TimeoutException {
 
-        Map<Integer,String> deadFeautures = new HashMap<>();
+        Map<Integer,String> deadFeatures = new HashMap<>();
 
         for (Integer key: features.keySet()) {
 
@@ -98,32 +98,56 @@ public class Main {
             value.insertFirst(key);
 
             if(!problem.isSatisfiable(value)){
-                deadFeautures.put(key,features.get(key));
+                deadFeatures.put(key,features.get(key));
             }
         }
 
-        return deadFeautures;
+        return deadFeatures;
     }
 
     private static int getNbrOfImplicationsAndCreateFile(IProblem problem, Map<Integer,String> features)
-            throws TimeoutException {
+            throws TimeoutException, IOException {
 
         List<String> implications = new ArrayList<>();
         int amount = 0;
+        IVecInt bothTrue;
+        IVecInt bothFalse;
+        IVecInt trueA;
+        IVecInt trueB;
 
-        //Checks if A implies B ((not A) or B)
+        //Checks if A implies B by testing the truth table
+
         for (Integer A: features.keySet()) {
             for (Integer B: features.keySet()) {
-                IVecInt value = new VecInt();
+                bothTrue = new VecInt();
+                bothTrue.insertFirst(B);
+                bothTrue.insertFirst(A);
 
-                value.insertFirst(B);
-                value.insertFirst(-A);
+                bothFalse = new VecInt();
+                bothFalse.insertFirst(-B);
+                bothFalse.insertFirst(-A);
 
-                if(!problem.isSatisfiable(value)){
+                trueA = new VecInt();
+                trueA.insertFirst(-B);
+                trueA.insertFirst(A);
+
+                trueB = new VecInt();
+                trueB.insertFirst(B);
+                trueB.insertFirst(-A);
+
+                if(problem.isSatisfiable(bothTrue) && problem.isSatisfiable(bothFalse) && problem.isSatisfiable(trueB)
+                && !problem.isSatisfiable(trueA)){
                     amount++;
+                    implications.add(features.get(A) + " -> " + features.get(B));
                 }
             }
         }
+
+        PrintWriter writer = new PrintWriter("src/main/resources/implications.txt", "UTF-8");
+        for (String s : implications) {
+            writer.println(s);
+        }
+        writer.close();
 
         return amount;
     }
