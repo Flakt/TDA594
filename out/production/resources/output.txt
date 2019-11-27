@@ -1,9 +1,0 @@
-Satisfiable !
-Number of features: 193
-Number of dead features: 5
-112: CYGSEM_IO_ETH_DRIVERS_WARN
-129: BUILD_REDBOOT_BIN_FLOPPY
-119: IO_ETH_DRIVERS_LWIP
-40: USE_TRACING
-1151: REDBOOT_HAL_OPTIONS
-Number of implications: 99
