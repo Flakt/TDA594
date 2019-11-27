@@ -21,7 +21,7 @@ public class Main {
 
         try {
             IProblem problem = reader.parseInstance(filePath);
-            PrintWriter writer = new PrintWriter("src/main/resources/output.txt", "UTF-8");
+            PrintWriter writer = new PrintWriter("output.txt", "UTF-8");
             if (problem.isSatisfiable()) {
 
 
@@ -126,7 +126,7 @@ public class Main {
             }
         }
 
-        PrintWriter writer = new PrintWriter("src/main/resources/implications.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("implications.txt", "UTF-8");
         for (String s : implications) {
             writer.println(s);
         }
