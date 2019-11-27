@@ -21,23 +21,28 @@ public class Main {
 
         try {
             IProblem problem = reader.parseInstance(filePath);
+            PrintWriter writer = new PrintWriter("src/main/resources/output.txt", "UTF-8");
             if (problem.isSatisfiable()) {
-                System.out.println("Satisfiable !");
+
+
+                writer.println("Satisfiable !");
 
                 Map<Integer,String> features = getFeatures(problem,filePath);
-                System.out.println("Number of features: " + features.size());
+                writer.println("Number of features: " + features.size());
 
                 Map<Integer,String> deadFeatures = getDeadFeatures(problem, features);
-                System.out.println("Number of dead features: " + deadFeatures.size());
+                writer.println("Number of dead features: " + deadFeatures.size());
+                writer.println("The dead features are: ");
                 for (Integer key:deadFeatures.keySet()) {
-                    System.out.println(key + ": " + deadFeatures.get(key));
+                    writer.println(key + ": " + deadFeatures.get(key));
                 }
 
-                System.out.println("Number of implications: " + getNbrOfImplicationsAndCreateFile(problem, features));
+                writer.println("Number of implications: " + getNbrOfImplicationsAndCreateFile(problem, features));
 
             } else {
-                System.out.println("Unsatisfiable !");
+                writer.println("Unsatisfiable !");
             }
+            writer.close();
         } catch (ParseFormatException | IOException e) {
             // TODO Auto-generated catch block
         } catch (ContradictionException e) {
