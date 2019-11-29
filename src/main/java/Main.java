@@ -17,11 +17,11 @@ public class Main {
         ISolver solver = SolverFactory.newDefault();
         solver.setTimeout(3600); // 1 hour timeout
         Reader reader = new DimacsReader(solver);
-        String filePath = "src/main/resources/ecos_x86.dimacs";
+        String filePath = "src/main/resources/small.dimacs";
 
         try {
             IProblem problem = reader.parseInstance(filePath);
-            PrintWriter writer = new PrintWriter("output.txt", "UTF-8");
+            PrintWriter writer = new PrintWriter("src/output.txt", "UTF-8");
             if (problem.isSatisfiable()) {
 
 
@@ -126,7 +126,7 @@ public class Main {
             }
         }
 
-        PrintWriter writer = new PrintWriter("implications.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("src/implications.txt", "UTF-8");
         for (String s : implications) {
             writer.println(s);
         }
