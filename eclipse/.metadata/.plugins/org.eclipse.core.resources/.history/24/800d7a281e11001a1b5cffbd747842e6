@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+	<properties>
+		<graphics key="showhiddenfeatures" value="true"/>
+		<graphics key="legendposition" value="875,23"/>
+		<graphics key="legendautolayout" value="false"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="horizontal"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="1"/>
+	</properties>
+	<struct>
+		<and abstract="true" mandatory="true" name="Elevator">
+			<graphics key="collapsed" value="false"/>
+			<alt abstract="true" mandatory="true" name="Behaviour">
+				<graphics key="collapsed" value="false"/>
+				<feature name="ShortestPath"/>
+				<feature name="Fifo"/>
+				<feature name="Sabbath"/>
+			</alt>
+			<alt abstract="true" mandatory="true" name="Call Button">
+				<feature name="Directed Call">
+					<graphics key="collapsed" value="false"/>
+				</feature>
+				<feature name="Undirected Call"/>
+			</alt>
+			<feature mandatory="true" name="Airing"/>
+			<alt abstract="true" mandatory="true" name="Priority">
+				<feature name="RushHourPriority"/>
+				<feature name="PersonPriority"/>
+				<feature name="FloorPriority"/>
+			</alt>
+		</and>
+	</struct>
+	<constraints>
+		<rule>
+			<imp>
+				<var>Directed Call</var>
+				<var>ShortestPath</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>Undirected Call</var>
+				<disj>
+					<var>ShortestPath</var>
+					<var>Fifo</var>
+				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>Airing</var>
+				<conj>
+					<not>
+						<var>RushHourPriority</var>
+					</not>
+					<not>
+						<var>PersonPriority</var>
+					</not>
+				</conj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>ShortestPath</var>
+				<not>
+					<var>RushHourPriority</var>
+				</not>
+			</imp>
+		</rule>
+	</constraints>
+</featureModel>
