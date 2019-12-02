@@ -55,6 +55,7 @@
 			</and>
 			<and name="SavingWhat">
 				<feature name="SurfingInformation"/>
+				<feature name="GuessFactorInformation"/>
 			</and>
 		</and>
 	</struct>
@@ -75,6 +76,15 @@
 			<imp>
 				<var>SurfingInformation</var>
 				<var>WaveSurfing</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>GuessFactorInformation</var>
+				<disj>
+					<var>GuessFactorTargeting</var>
+					<var>GuessFactors</var>
+				</disj>
 			</imp>
 		</rule>
 	</constraints>
