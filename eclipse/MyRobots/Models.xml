@@ -2,83 +2,79 @@
 <featureModel>
 	<properties>
 		<graphics key="showhiddenfeatures" value="true"/>
-		<graphics key="legendposition" value="875,23"/>
-		<graphics key="legendautolayout" value="false"/>
+		<graphics key="legendautolayout" value="true"/>
 		<graphics key="showshortnames" value="false"/>
-		<graphics key="layout" value="horizontal"/>
+		<graphics key="layout" value="vertical"/>
 		<graphics key="showcollapsedconstraints" value="true"/>
 		<graphics key="legendhidden" value="false"/>
-		<graphics key="layoutalgorithm" value="1"/>
+		<graphics key="layoutalgorithm" value="4"/>
 	</properties>
 	<struct>
-		<and abstract="true" mandatory="true" name="Elevator">
-			<graphics key="collapsed" value="false"/>
-			<alt abstract="true" mandatory="true" name="Behaviour">
-				<graphics key="collapsed" value="false"/>
-				<feature name="ShortestPath"/>
-				<feature name="Fifo"/>
-				<feature name="Sabbath"/>
-			</alt>
-			<alt abstract="true" mandatory="true" name="Call Button">
-				<feature name="Directed Call">
-					<graphics key="collapsed" value="false"/>
-				</feature>
-				<feature name="Undirected Call"/>
-			</alt>
-			<feature name="Airing"/>
-			<alt abstract="true" mandatory="true" name="Priority">
-				<feature name="RushHourPriority"/>
-				<feature name="PersonPriority"/>
-				<feature name="FloorPriority"/>
-			</alt>
+		<and abstract="true" mandatory="true" name="Robot">
+			<or mandatory="true" name="Movement">
+				<or name="WaveSurfing">
+					<feature name="ToGo"/>
+					<feature name="GuessFactors"/>
+					<feature name="DynamicClustering"/>
+					<feature name="TrueSurfing"/>
+					<feature name="MeleeSurfing"/>
+					<feature name="PaintWaves"/>
+				</or>
+				<feature name="MinimumRiskMovement"/>
+				<feature name="Flattener"/>
+				<feature name="ConstantMovement"/>
+			</or>
+			<or name="Targeting">
+				<feature name="PlayItForward"/>
+				<and name="GuessFactorTargeting">
+					<feature name="GaffsTargeting"/>
+				</and>
+				<feature name="DisplacementVector"/>
+				<feature name="DynamicClusteringTargeting"/>
+				<or name="ShadowMelee">
+					<feature name="SwarmTargeting"/>
+					<feature name="PrayOTheWeak"/>
+					<feature name="NoWaste"/>
+				</or>
+				<feature name="HeadOn"/>
+			</or>
+			<or mandatory="true" name="Radar">
+				<feature name="SpinningRadar"/>
+				<feature name="InfinityLock"/>
+			</or>
+			<or name="Type">
+				<feature name="OneVOne"/>
+				<feature name="Melee"/>
+			</or>
+			<or name="SavingWhen">
+				<feature name="AfterRound"/>
+				<feature name="AfterMatch"/>
+			</or>
+			<and name="SpecialBehaviour">
+				<feature name="WallSmoothing"/>
+			</and>
+			<and name="SavingWhat">
+				<feature name="SurfingInformation"/>
+			</and>
 		</and>
 	</struct>
 	<constraints>
 		<rule>
 			<imp>
-				<var>Directed Call</var>
-				<var>ShortestPath</var>
+				<var>SavingWhat</var>
+				<var>SavingWhen</var>
 			</imp>
 		</rule>
 		<rule>
 			<imp>
-				<var>Undirected Call</var>
-				<disj>
-					<var>ShortestPath</var>
-					<var>Fifo</var>
-				</disj>
+				<var>SavingWhen</var>
+				<var>SavingWhat</var>
 			</imp>
 		</rule>
 		<rule>
 			<imp>
-				<var>Airing</var>
-				<conj>
-					<not>
-						<var>RushHourPriority</var>
-					</not>
-					<not>
-						<var>PersonPriority</var>
-					</not>
-				</conj>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
-				<var>ShortestPath</var>
-				<not>
-					<var>RushHourPriority</var>
-				</not>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
-				<conj>
-					<var>Fifo</var>
-					<var>PersonPriority</var>
-				</conj>
-				<not>
-					<var>Undirected Call</var>
-				</not>
+				<var>SurfingInformation</var>
+				<var>WaveSurfing</var>
 			</imp>
 		</rule>
 	</constraints>
