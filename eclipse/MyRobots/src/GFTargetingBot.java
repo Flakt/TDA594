@@ -1,4 +1,3 @@
-package robots;
 import robocode.*;
 import robocode.util.Utils;
 import java.awt.Color;

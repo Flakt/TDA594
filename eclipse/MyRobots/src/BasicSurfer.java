@@ -1,5 +1,3 @@
-package robots;
- 
 import robocode.*;
 import robocode.util.Utils;
 import java.awt.geom.*;     // for Point2D's

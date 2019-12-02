@@ -1,5 +1,3 @@
-package robots;
-
 import robocode.*;
 
 public class testBot extends Robot {
