@@ -13,29 +13,21 @@
 		<and abstract="true" mandatory="true" name="Robot">
 			<or mandatory="true" name="Movement">
 				<or name="WaveSurfing">
-					<feature name="ToGo"/>
 					<feature name="GuessFactors"/>
-					<feature name="DynamicClustering"/>
 					<feature name="TrueSurfing"/>
-					<feature name="MeleeSurfing"/>
-					<feature name="PaintWaves"/>
 				</or>
-				<feature name="MinimumRiskMovement"/>
-				<feature name="Flattener"/>
 				<feature name="ConstantMovement"/>
+				<feature name="WallSmoothing"/>
 			</or>
 			<or name="Targeting">
-				<feature name="PlayItForward"/>
 				<and name="GuessFactorTargeting">
 					<feature name="GaffsTargeting"/>
 				</and>
 				<feature name="DisplacementVector"/>
-				<feature name="DynamicClusteringTargeting"/>
-				<or name="ShadowMelee">
-					<feature name="SwarmTargeting"/>
-					<feature name="PrayOTheWeak"/>
-					<feature name="NoWaste"/>
-				</or>
+				<feature name="StatisticalTargeting"/>
+				<feature name="SwarmTargeting"/>
+				<feature name="PrayOTheWeak"/>
+				<feature name="NoWaste"/>
 				<feature name="HeadOn"/>
 			</or>
 			<or mandatory="true" name="Radar">
@@ -50,12 +42,13 @@
 				<feature name="AfterRound"/>
 				<feature name="AfterMatch"/>
 			</or>
-			<and name="SpecialBehaviour">
-				<feature name="WallSmoothing"/>
-			</and>
 			<and name="SavingWhat">
 				<feature name="SurfingInformation"/>
 				<feature name="GuessFactorInformation"/>
+			</and>
+			<and name="Visual">
+				<feature name="PaintWaves"/>
+				<feature name="ChangeRobotColour"/>
 			</and>
 		</and>
 	</struct>
@@ -85,6 +78,12 @@
 					<var>GuessFactorTargeting</var>
 					<var>GuessFactors</var>
 				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>PaintWaves</var>
+				<var>WaveSurfing</var>
 			</imp>
 		</rule>
 	</constraints>

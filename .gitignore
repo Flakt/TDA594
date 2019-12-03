@@ -9,6 +9,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+eclipse/MyRobots/.classpath
+*.prefs
 
 # External tool builders
 .externalToolBuilders/
