@@ -11,44 +11,42 @@
 	</properties>
 	<struct>
 		<and abstract="true" mandatory="true" name="Robot">
-			<or mandatory="true" name="Movement">
+			<or abstract="true" mandatory="true" name="Movement">
 				<or name="WaveSurfing">
 					<feature name="GuessFactors"/>
 					<feature name="TrueSurfing"/>
 				</or>
 				<feature name="ConstantMovement"/>
 				<feature name="WallSmoothing"/>
+				<feature name="OrbitalMovement"/>
+				<feature name="RandomMovement"/>
 			</or>
-			<or name="Targeting">
-				<and name="GuessFactorTargeting">
-					<feature name="GaffsTargeting"/>
-				</and>
+			<or abstract="true" name="Targeting">
+				<feature name="GuessFactorTargeting"/>
 				<feature name="DisplacementVector"/>
 				<feature name="StatisticalTargeting"/>
-				<feature name="SwarmTargeting"/>
-				<feature name="PrayOTheWeak"/>
-				<feature name="NoWaste"/>
-				<feature name="HeadOn"/>
 			</or>
-			<or mandatory="true" name="Radar">
+			<or abstract="true" mandatory="true" name="Radar">
 				<feature name="SpinningRadar"/>
 				<feature name="InfinityLock"/>
 			</or>
-			<or name="Type">
+			<or abstract="true" name="Type">
 				<feature name="OneVOne"/>
 				<feature name="Melee"/>
 			</or>
-			<or name="SavingWhen">
-				<feature name="AfterRound"/>
-				<feature name="AfterMatch"/>
-			</or>
-			<and name="SavingWhat">
-				<feature name="SurfingInformation"/>
-				<feature name="GuessFactorInformation"/>
-			</and>
-			<and name="Visual">
+			<and abstract="true" name="Visual">
 				<feature name="PaintWaves"/>
 				<feature name="ChangeRobotColour"/>
+			</and>
+			<and abstract="true" name="Saving">
+				<and abstract="true" name="SavingWhen">
+					<feature name="AfterRound"/>
+					<feature name="WhenHit"/>
+				</and>
+				<and abstract="true" name="SavingWhat">
+					<feature name="VisitCountStats"/>
+					<feature name="EnemyInfo"/>
+				</and>
 			</and>
 		</and>
 	</struct>
@@ -67,23 +65,14 @@
 		</rule>
 		<rule>
 			<imp>
-				<var>SurfingInformation</var>
-				<var>WaveSurfing</var>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
-				<var>GuessFactorInformation</var>
-				<disj>
-					<var>GuessFactorTargeting</var>
-					<var>GuessFactors</var>
-				</disj>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
 				<var>PaintWaves</var>
 				<var>WaveSurfing</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>WaveSurfing</var>
+				<var>OrbitalMovement</var>
 			</imp>
 		</rule>
 	</constraints>
