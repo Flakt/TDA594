@@ -21,32 +21,26 @@
 				<feature name="OrbitalMovement"/>
 				<feature name="RandomMovement"/>
 			</or>
-			<or abstract="true" name="Targeting">
+			<and abstract="true" name="Targeting">
 				<feature name="GuessFactorTargeting"/>
-				<feature name="DisplacementVector"/>
-				<feature name="StatisticalTargeting"/>
-			</or>
+			</and>
 			<or abstract="true" mandatory="true" name="Radar">
 				<feature name="SpinningRadar"/>
 				<feature name="InfinityLock"/>
-			</or>
-			<or abstract="true" name="Type">
-				<feature name="OneVOne"/>
-				<feature name="Melee"/>
 			</or>
 			<and abstract="true" name="Visual">
 				<feature name="PaintWaves"/>
 				<feature name="ChangeRobotColour"/>
 			</and>
 			<and abstract="true" name="Saving">
-				<and abstract="true" name="SavingWhen">
+				<or abstract="true" mandatory="true" name="SavingWhen">
 					<feature name="AfterRound"/>
 					<feature name="WhenHit"/>
-				</and>
-				<and abstract="true" name="SavingWhat">
+				</or>
+				<or abstract="true" mandatory="true" name="SavingWhat">
 					<feature name="VisitCountStats"/>
 					<feature name="EnemyInfo"/>
-				</and>
+				</or>
 			</and>
 		</and>
 	</struct>
