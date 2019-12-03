@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature name="Robot"/>
+	<feature name="Movement"/>
+	<feature name="WaveSurfing"/>
+	<feature name="GuessFactors"/>
+	<feature name="TrueSurfing"/>
+	<feature name="ConstantMovement"/>
+	<feature name="WallSmoothing"/>
+	<feature name="OrbitalMovement"/>
+	<feature name="RandomMovement"/>
+	<feature name="Targeting"/>
+	<feature name="GuessFactorTargeting"/>
+	<feature name="Radar"/>
+	<feature name="SpinningRadar"/>
+	<feature name="InfinityLock"/>
+	<feature name="Visual"/>
+	<feature name="PaintWaves"/>
+	<feature name="ChangeRobotColour"/>
+	<feature name="Saving"/>
+	<feature name="SavingWhen"/>
+	<feature name="AfterRound"/>
+	<feature name="WhenHit"/>
+	<feature name="SavingWhat"/>
+	<feature name="VisitCountStats"/>
+	<feature name="EnemyInfo"/>
+</configuration>
