@@ -82,8 +82,9 @@ public class BasicGFSurfer extends AdvancedRobot {
 //@            // basic mini-radar code
 //@            turnRadarRightRadians(Double.POSITIVE_INFINITY);
 //@        } while (true);
-//@    }
+//@    
     //#endif
+    }
     
     public void onScannedRobot(ScannedRobotEvent e) {
     //#if WaveSurfing
