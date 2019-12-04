@@ -64,16 +64,16 @@ public class BasicGFSurfer extends AdvancedRobot {
     public static double WALL_STICK = 160;
 
     public void run() {
-    	//#if ChangeRobotColour
+    //#if ChangeRobotColour
 		setColors(Color.BLUE, Color.BLACK, Color.YELLOW);
-		//#endif
+	//#endif
 		lateralDirection = 1;
 		lastEnemyVelocity = 0;
 		
         _enemyWaves = new ArrayList();
         _surfDirections = new ArrayList();
         _surfAbsBearings = new ArrayList();
-        //#if SpinningRadar
+    //#if SpinningRadar
         setAdjustGunForRobotTurn(true);
         setAdjustRadarForGunTurn(true);
 
@@ -85,7 +85,7 @@ public class BasicGFSurfer extends AdvancedRobot {
     //#endif
     
     public void onScannedRobot(ScannedRobotEvent e) {
-    	//#if WaveSurfing
+    //#if WaveSurfing
         _myLocation = new Point2D.Double(getX(), getY());
 
         double lateralVelocity = getVelocity()*Math.sin(e.getBearingRadians());
@@ -120,8 +120,8 @@ public class BasicGFSurfer extends AdvancedRobot {
 
         updateWaves();
         doSurfing();
-        //#endif
-        //#if GuessFactorTargeting
+    //#endif
+    //#if GuessFactorTargeting
 		double enemyAbsoluteBearing = getHeadingRadians() + e.getBearingRadians();
 		double enemyDistance = e.getDistance();
 		double enemyVelocity = e.getVelocity();
@@ -140,13 +140,14 @@ public class BasicGFSurfer extends AdvancedRobot {
 		setFire(wave.bulletPower);
 		if (getEnergy() >= BULLET_POWER) {
 			addCustomEvent(wave);
-		}//#endif
-		//#if OrbitalMovement && RandomMovement
+		}
+	//#endif
+	//#if OrbitalMovement && RandomMovement
 		movement.onScannedRobot(e);
-		//#endif
-		//#if GuessFactorTargeting && InfinityLock
+	//#endif
+	//#if GuessFactorTargeting && InfinityLock
 		setTurnRadarRightRadians(Utils.normalRelativeAngle(enemyAbsoluteBearing - getRadarHeadingRadians()) * 2);
-		//#endif
+	//#endif
     }
     
     //#if PaintWaves
@@ -168,7 +169,7 @@ public class BasicGFSurfer extends AdvancedRobot {
               g.drawOval((int)(center.x - radius ), (int)(center.y - radius), radius*2, radius*2);
         }
    }
-  //#endif
+    //#endif
     //#if WaveSurfing
     public void updateWaves() {
         for (int x = 0; x < _enemyWaves.size(); x++) {
@@ -214,7 +215,7 @@ public class BasicGFSurfer extends AdvancedRobot {
             (factor * ((BINS - 1) / 2)) + ((BINS - 1) / 2),
             BINS - 1);
     }
-  //#endif
+    //#endif
     
     // Given the EnemyWave that the bullet was on, and the point where we
     // were hit, update our stat array to reflect the danger in that area.
@@ -377,7 +378,7 @@ public class BasicGFSurfer extends AdvancedRobot {
     //#endif
     // got this from RaikoMicro, by Jamougha, but I think it's used by many authors
     //  - returns the absolute angle (in radians) from source to target points
-  //#if WaveSurfing
+    //#if WaveSurfing
     public static double absoluteBearing(Point2D.Double source, Point2D.Double target) {
         return Math.atan2(target.x - source.x, target.y - source.y);
     }
@@ -416,7 +417,7 @@ public class BasicGFSurfer extends AdvancedRobot {
     }
     //#endif
 }
-//#if GuessFactorTargeting
+    //#if GuessFactorTargeting
 class GFTWave extends Condition {
 	static Point2D targetLocation;
 
@@ -488,8 +489,8 @@ class GFTWave extends Condition {
 	}	
 }
 
-//#endif
-//#if GuessFactorTargeting || (OrbitalMovement && RandomMovement)
+    //#endif
+    //#if GuessFactorTargeting || (OrbitalMovement && RandomMovement)
 class GFTUtils {
 	static double bulletVelocity(double power) {
 		return 20 - 3 * power;
@@ -512,9 +513,9 @@ class GFTUtils {
 		return Math.max(min, Math.min(max, v));
 	}
 }
-//#endif
+    //#endif
 
-//#if OrbitalMovement && RandomMovement
+	//#if OrbitalMovement && RandomMovement
 class GFTMovement {
 	private static final double BATTLE_FIELD_WIDTH = 800;
 	private static final double BATTLE_FIELD_HEIGHT = 600;
@@ -558,4 +559,4 @@ class GFTMovement {
 		robot.setTurnRightRadians(Math.tan(angle));
 	}
 }
-//#endif
+	//#endif
