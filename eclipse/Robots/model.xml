@@ -18,7 +18,7 @@
 				<feature name="RandomMovement"/>
 			</or>
 			<and abstract="true" name="Targeting">
-				<feature name="GuessFactorTargeting"/>
+				<feature mandatory="true" name="GuessFactorTargeting"/>
 			</and>
 			<or abstract="true" name="Radar">
 				<feature name="SpinningRadar"/>
