@@ -1,4 +1,3 @@
-
 import robocode.*;
 import robocode.util.Utils;
 import java.awt.geom.*;     // for Point2D's
@@ -19,7 +18,7 @@ import java.awt.Color;
 
 public class BasicGFSurfer extends AdvancedRobot {
 	
-	//#if VisitCountStats
+	//#if WaveSurfing
     public static int BINS = 47;
     public static double _surfStats[] = new double[BINS]; // we'll use 47 bins
     //#endif
@@ -51,7 +50,7 @@ public class BasicGFSurfer extends AdvancedRobot {
     // We must keep track of the enemy's energy level to detect EnergyDrop,
     // indicating a bullet is fired
 	
-	//#ifdef WaveSurfing
+	//#if WaveSurfing
     public static double _oppEnergy = 100.0;
     //#endif
 
@@ -201,7 +200,7 @@ public class BasicGFSurfer extends AdvancedRobot {
 
         return surfWave;
     }
-    //#endif
+    
 
     // Given the EnemyWave that the bullet was on, and the point where we
     // were hit, calculate the index into our stat array for that factor.
@@ -215,7 +214,7 @@ public class BasicGFSurfer extends AdvancedRobot {
             (factor * ((BINS - 1) / 2)) + ((BINS - 1) / 2),
             BINS - 1);
     }
-    
+  //#endif
     
     // Given the EnemyWave that the bullet was on, and the point where we
     // were hit, update our stat array to reflect the danger in that area.
@@ -527,10 +526,9 @@ class GFTMovement {
  
 	private AdvancedRobot robot;
 	
-	//#if WallSmoothing
+	
 	private Rectangle2D fieldRectangle = new Rectangle2D.Double(WALL_MARGIN, WALL_MARGIN,
 		BATTLE_FIELD_WIDTH - WALL_MARGIN * 2, BATTLE_FIELD_HEIGHT - WALL_MARGIN * 2);
-	//#endif
 	
 	private double enemyFirePower = 3;
 	private double direction = 0.4;
