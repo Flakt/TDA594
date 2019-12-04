@@ -16,6 +16,7 @@
 					<feature name="GuessFactors"/>
 					<feature name="TrueSurfing"/>
 				</or>
+				<feature name="ConstantMovement"/>
 				<feature name="WallSmoothing"/>
 				<feature name="OrbitalMovement"/>
 				<feature name="RandomMovement"/>
@@ -46,6 +47,18 @@
 	<constraints>
 		<rule>
 			<imp>
+				<var>SavingWhat</var>
+				<var>SavingWhen</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>SavingWhen</var>
+				<var>SavingWhat</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
 				<var>PaintWaves</var>
 				<var>WaveSurfing</var>
 			</imp>
@@ -54,25 +67,6 @@
 			<imp>
 				<var>WaveSurfing</var>
 				<var>OrbitalMovement</var>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
-				<var>OrbitalMovement</var>
-				<disj>
-					<conj>
-						<var>WaveSurfing</var>
-						<not>
-							<var>RandomMovement</var>
-						</not>
-					</conj>
-					<conj>
-						<not>
-							<var>WaveSurfing</var>
-						</not>
-						<var>RandomMovement</var>
-					</conj>
-				</disj>
 			</imp>
 		</rule>
 	</constraints>
