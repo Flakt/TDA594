@@ -8,9 +8,9 @@
 	<feature automatic="unselected" name="RandomMovement"/>
 	<feature name="Targeting"/>
 	<feature name="GuessFactorTargeting"/>
-	<feature name="Radar"/>
+	<feature automatic="selected" name="Radar"/>
 	<feature name="SpinningRadar"/>
-	<feature name="InfinityLock"/>
+	<feature manual="selected" name="InfinityLock"/>
 	<feature name="Visual"/>
 	<feature name="PaintWaves"/>
 	<feature name="ChangeRobotColour"/>
