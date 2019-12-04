@@ -69,10 +69,11 @@ public class BasicGFSurfer extends AdvancedRobot {
 	//#endif
 		lateralDirection = 1;
 		lastEnemyVelocity = 0;
-		
+	//#if WaveSurfing
         _enemyWaves = new ArrayList();
         _surfDirections = new ArrayList();
         _surfAbsBearings = new ArrayList();
+    //#endif
     //#if SpinningRadar
         setAdjustGunForRobotTurn(true);
         setAdjustRadarForGunTurn(true);
