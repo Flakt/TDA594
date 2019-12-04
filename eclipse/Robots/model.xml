@@ -12,10 +12,7 @@
 	<struct>
 		<and abstract="true" mandatory="true" name="Robot">
 			<or abstract="true" mandatory="true" name="Movement">
-				<or name="WaveSurfing">
-					<feature name="GuessFactors"/>
-					<feature name="TrueSurfing"/>
-				</or>
+				<feature name="WaveSurfing"/>
 				<feature name="WallSmoothing"/>
 				<feature name="OrbitalMovement"/>
 				<feature name="RandomMovement"/>
@@ -52,7 +49,7 @@
 		</rule>
 		<rule>
 			<imp>
-				<var>WaveSurfing</var>
+				<var>RandomMovement</var>
 				<var>OrbitalMovement</var>
 			</imp>
 		</rule>
@@ -73,6 +70,12 @@
 						<var>RandomMovement</var>
 					</conj>
 				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>WallSmoothing</var>
+				<var>WaveSurfing</var>
 			</imp>
 		</rule>
 	</constraints>
