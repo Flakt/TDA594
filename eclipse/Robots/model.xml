@@ -20,24 +20,14 @@
 			<and abstract="true" name="Targeting">
 				<feature name="GuessFactorTargeting"/>
 			</and>
-			<or abstract="true" mandatory="true" name="Radar">
+			<or abstract="true" name="Radar">
 				<feature name="SpinningRadar"/>
 				<feature name="InfinityLock"/>
 			</or>
-			<and abstract="true" name="Visual">
+			<or abstract="true" name="Visual">
 				<feature name="PaintWaves"/>
 				<feature name="ChangeRobotColour"/>
-			</and>
-			<and abstract="true" name="Saving">
-				<or abstract="true" mandatory="true" name="SavingWhen">
-					<feature name="AfterRound"/>
-					<feature name="WhenHit"/>
-				</or>
-				<or abstract="true" mandatory="true" name="SavingWhat">
-					<feature name="VisitCountStats"/>
-					<feature name="EnemyInfo"/>
-				</or>
-			</and>
+			</or>
 		</and>
 	</struct>
 	<constraints>
@@ -76,6 +66,14 @@
 			<imp>
 				<var>WallSmoothing</var>
 				<var>WaveSurfing</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>RandomMovement</var>
+				<not>
+					<var>WaveSurfing</var>
+				</not>
 			</imp>
 		</rule>
 	</constraints>
