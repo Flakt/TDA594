@@ -45,25 +45,6 @@
 		</rule>
 		<rule>
 			<imp>
-				<var>OrbitalMovement</var>
-				<disj>
-					<conj>
-						<var>WaveSurfing</var>
-						<not>
-							<var>RandomMovement</var>
-						</not>
-					</conj>
-					<conj>
-						<not>
-							<var>WaveSurfing</var>
-						</not>
-						<var>RandomMovement</var>
-					</conj>
-				</disj>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
 				<var>WallSmoothing</var>
 				<var>WaveSurfing</var>
 			</imp>
@@ -74,6 +55,12 @@
 				<not>
 					<var>WaveSurfing</var>
 				</not>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>OrbitalMovement</var>
+				<var>RandomMovement</var>
 			</imp>
 		</rule>
 	</constraints>
