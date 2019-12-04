@@ -1,5 +1,4 @@
 
-
 import robocode.*;
 import robocode.util.Utils;
 import java.awt.geom.*;     // for Point2D's
@@ -29,8 +28,9 @@ public class BasicGFSurfer extends AdvancedRobot {
     public ArrayList _surfDirections;
     public ArrayList _surfAbsBearings;
     //#endif
+    //#if GuessFactorTargeting
 	private static final double BULLET_POWER = 1.9;
-	
+	//#endif
 	private static double lateralDirection;
 	private static double lastEnemyVelocity;
 	//#if OrbitalMovement && RandomMovement
@@ -159,7 +159,8 @@ public class BasicGFSurfer extends AdvancedRobot {
               g.drawOval((int)(center.x - radius ), (int)(center.y - radius), radius*2, radius*2);
         }
    }
-   
+  //#endif
+    //#if WaveSurfing
     public void updateWaves() {
         for (int x = 0; x < _enemyWaves.size(); x++) {
             EnemyWave ew = (EnemyWave)_enemyWaves.get(x);
@@ -190,6 +191,7 @@ public class BasicGFSurfer extends AdvancedRobot {
 
         return surfWave;
     }
+    //#endif
 
     // Given the EnemyWave that the bullet was on, and the point where we
     // were hit, calculate the index into our stat array for that factor.
@@ -203,7 +205,7 @@ public class BasicGFSurfer extends AdvancedRobot {
             (factor * ((BINS - 1) / 2)) + ((BINS - 1) / 2),
             BINS - 1);
     }
-    //#endif
+    
     
     // Given the EnemyWave that the bullet was on, and the point where we
     // were hit, update our stat array to reflect the danger in that area.
@@ -358,7 +360,7 @@ public class BasicGFSurfer extends AdvancedRobot {
     //   - returns point length away from sourceLocation, at angle
     // robowiki.net?CassiusClay
     
-    //#if WallSmoothing
+    //#if WallSmoothing 
     public static Point2D.Double project(Point2D.Double sourceLocation, double angle, double length) {
         return new Point2D.Double(sourceLocation.x + Math.sin(angle) * length,
             sourceLocation.y + Math.cos(angle) * length);
@@ -508,8 +510,12 @@ class GFTMovement {
 	private static final double WALL_BOUNCE_TUNER = 0.699484;
  
 	private AdvancedRobot robot;
+	
+	//#if WallSmoothing
 	private Rectangle2D fieldRectangle = new Rectangle2D.Double(WALL_MARGIN, WALL_MARGIN,
 		BATTLE_FIELD_WIDTH - WALL_MARGIN * 2, BATTLE_FIELD_HEIGHT - WALL_MARGIN * 2);
+	//#endif
+	
 	private double enemyFirePower = 3;
 	private double direction = 0.4;
  
