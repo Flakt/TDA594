@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+	<properties>
+		<graphics key="showhiddenfeatures" value="true"/>
+		<graphics key="legendautolayout" value="true"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="vertical"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="4"/>
+	</properties>
+	<struct>
+		<and abstract="true" mandatory="true" name="Robot">
+			<or abstract="true" mandatory="true" name="Movement">
+				<or name="WaveSurfing">
+					<feature name="GuessFactors"/>
+					<feature name="TrueSurfing"/>
+				</or>
+				<feature name="ConstantMovement"/>
+				<feature name="WallSmoothing"/>
+				<feature name="OrbitalMovement"/>
+				<feature name="RandomMovement"/>
+			</or>
+			<and abstract="true" name="Targeting">
+				<feature name="GuessFactorTargeting"/>
+			</and>
+			<or abstract="true" mandatory="true" name="Radar">
+				<feature name="SpinningRadar"/>
+				<feature name="InfinityLock"/>
+			</or>
+			<and abstract="true" name="Visual">
+				<feature name="PaintWaves"/>
+				<feature name="ChangeRobotColour"/>
+			</and>
+			<and abstract="true" name="Saving">
+				<or abstract="true" mandatory="true" name="SavingWhen">
+					<feature name="AfterRound"/>
+					<feature name="WhenHit"/>
+				</or>
+				<or abstract="true" mandatory="true" name="SavingWhat">
+					<feature name="VisitCountStats"/>
+					<feature name="EnemyInfo"/>
+				</or>
+			</and>
+		</and>
+	</struct>
+	<constraints>
+		<rule>
+			<imp>
+				<var>SavingWhat</var>
+				<var>SavingWhen</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>SavingWhen</var>
+				<var>SavingWhat</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>PaintWaves</var>
+				<var>WaveSurfing</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>WaveSurfing</var>
+				<var>OrbitalMovement</var>
+			</imp>
+		</rule>
+	</constraints>
+</featureModel>
