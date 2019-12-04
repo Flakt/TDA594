@@ -2,26 +2,16 @@
 <configuration>
 	<feature automatic="selected" name="Robot"/>
 	<feature automatic="selected" name="Movement"/>
-	<feature name="WaveSurfing"/>
-	<feature name="GuessFactors"/>
-	<feature name="TrueSurfing"/>
-	<feature name="ConstantMovement"/>
-	<feature name="WallSmoothing"/>
-	<feature name="OrbitalMovement"/>
-	<feature name="RandomMovement"/>
+	<feature automatic="unselected" name="WaveSurfing"/>
+	<feature automatic="unselected" name="WallSmoothing"/>
+	<feature automatic="selected" name="OrbitalMovement"/>
+	<feature manual="selected" name="RandomMovement"/>
 	<feature name="Targeting"/>
 	<feature name="GuessFactorTargeting"/>
-	<feature automatic="selected" name="Radar"/>
-	<feature name="SpinningRadar"/>
-	<feature name="InfinityLock"/>
-	<feature name="Visual"/>
-	<feature name="PaintWaves"/>
-	<feature name="ChangeRobotColour"/>
-	<feature name="Saving"/>
-	<feature name="SavingWhen"/>
-	<feature name="AfterRound"/>
-	<feature name="WhenHit"/>
-	<feature name="SavingWhat"/>
-	<feature name="VisitCountStats"/>
-	<feature name="EnemyInfo"/>
+	<feature automatic="selected" manual="selected" name="Radar"/>
+	<feature manual="selected" name="SpinningRadar"/>
+	<feature manual="selected" name="InfinityLock"/>
+	<feature automatic="selected" name="Visual"/>
+	<feature automatic="unselected" name="PaintWaves"/>
+	<feature manual="selected" name="ChangeRobotColour"/>
 </configuration>
