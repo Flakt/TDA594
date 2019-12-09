@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <featureModel>
 	<struct>
-		<and abstract="true" mandatory="true" name="framework">
+		<and abstract="true" mandatory="true" name="group9framework">
 			<feature name="Base"/>
 		</and>
 	</struct>
