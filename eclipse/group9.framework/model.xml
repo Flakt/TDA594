@@ -14,8 +14,7 @@
 			<or abstract="true" mandatory="true" name="Movement">
 				<feature name="WaveSurfing"/>
 				<feature name="WallSmoothing"/>
-				<feature name="OrbitalMovement"/>
-				<feature name="RandomMovement"/>
+				<feature name="RandomOrbitalMovement"/>
 			</or>
 			<or abstract="true" name="Targeting">
 				<feature name="GuessFactorTargeting"/>
@@ -27,7 +26,7 @@
 			</or>
 			<or abstract="true" name="Visual">
 				<feature name="PaintWaves"/>
-				<feature name="ChangeRobotColour"/>
+				<feature name="RobotColour"/>
 			</or>
 		</and>
 	</struct>
@@ -40,28 +39,16 @@
 		</rule>
 		<rule>
 			<imp>
-				<var>RandomMovement</var>
-				<var>OrbitalMovement</var>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
 				<var>WallSmoothing</var>
 				<var>WaveSurfing</var>
 			</imp>
 		</rule>
 		<rule>
 			<imp>
-				<var>RandomMovement</var>
+				<var>RandomOrbitalMovement</var>
 				<not>
 					<var>WaveSurfing</var>
 				</not>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
-				<var>OrbitalMovement</var>
-				<var>RandomMovement</var>
 			</imp>
 		</rule>
 	</constraints>
