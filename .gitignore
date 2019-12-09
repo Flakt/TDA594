@@ -12,6 +12,8 @@ local.properties
 eclipse/MyRobots/.classpath
 *.prefs
 eclipse/Robots/.project
+*.classpath
+*.project
 
 target/
 pom.xml.tag
