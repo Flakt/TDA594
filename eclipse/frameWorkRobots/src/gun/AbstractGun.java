@@ -1,5 +1,5 @@
 package gun;
 
 public abstract class AbstractGun {
-	abstract Double getFiringAngle();
+	public abstract Double getFiringAngle();
 }
