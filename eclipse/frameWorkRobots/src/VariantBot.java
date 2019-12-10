@@ -11,7 +11,7 @@ public class VariantBot extends AdvancedRobot {
     }
 
     public void onScannedRobot(ScannedRobotEvent e){
-        
+
     }
 
 }
