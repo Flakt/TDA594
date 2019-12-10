@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature automatic="selected" name="Robot"/>
+	<feature automatic="selected" name="Movement"/>
+	<feature manual="selected" name="WaveSurfing"/>
+	<feature name="WallSmoothing"/>
+	<feature automatic="unselected" name="RandomOrbitalMovement"/>
+	<feature name="Targeting"/>
+	<feature name="GuessFactorTargeting"/>
+	<feature name="LinearTargeting"/>
+	<feature automatic="selected" name="Radar"/>
+	<feature manual="selected" name="SpinningRadar"/>
+	<feature name="InfinityLock"/>
+	<feature name="Visual"/>
+	<feature name="PaintWaves"/>
+	<feature name="RobotColour"/>
+</configuration>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+	<properties>
+		<graphics key="showhiddenfeatures" value="true"/>
+		<graphics key="legendautolayout" value="true"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="vertical"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="4"/>
+	</properties>
+	<struct>
+		<and abstract="true" mandatory="true" name="Robot">
+			<or abstract="true" mandatory="true" name="Movement">
+				<feature name="WaveSurfing"/>
+				<feature name="WallSmoothing"/>
+				<feature name="RandomOrbitalMovement"/>
+			</or>
+			<or abstract="true" name="Targeting">
+				<feature name="GuessFactorTargeting"/>
+				<feature name="LinearTargeting"/>
+			</or>
+			<or abstract="true" mandatory="true" name="Radar">
+				<feature name="SpinningRadar"/>
+				<feature name="InfinityLock"/>
+			</or>
+			<or abstract="true" name="Visual">
+				<feature name="PaintWaves"/>
+				<feature name="RobotColour"/>
+			</or>
+		</and>
+	</struct>
+	<constraints>
+		<rule>
+			<imp>
+				<var>PaintWaves</var>
+				<var>WaveSurfing</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>WallSmoothing</var>
+				<var>WaveSurfing</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>RandomOrbitalMovement</var>
+				<not>
+					<var>WaveSurfing</var>
+				</not>
+			</imp>
+		</rule>
+	</constraints>
+</featureModel>
