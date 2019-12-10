@@ -16,8 +16,6 @@ public class LinearTargetingGun extends AbstractGun {
 	/**
 	 * Uses trigonometry as detailed in robocode.net/wiki/Linear_Targeting.
 	 * 
-	 * @param bulletPower the power of the bullet, used to determine the bullet travel time and speed
-	 * @param latVelocity the lateral velocity of the enemy robot
 	 * @return the firing angle
 	 */
 	@Override
