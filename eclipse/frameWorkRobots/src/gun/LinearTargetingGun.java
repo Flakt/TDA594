@@ -8,20 +8,25 @@ public class LinearTargetingGun extends AbstractGun {
 	
 	private AdvancedRobot robot;
 	
-	public LinearTargetingGun(double bulletSpeed, double latVelocity) {
-		this.bulletSpeed = bulletSpeed;
-		this.latVelocity = latVelocity;
+	public LinearTargetingGun(AdvancedRobot robot) {
+		this.robot = robot;
 	}
 	
-	/**
-	 * Uses trigonometry as detailed in robocode.net/wiki/Linear_Targeting to get the firing angle
-	 * 
-	 * @return the firing angle
-	 */
-	@Override
-	public Double getFiringAngle() {
+	private Double calcFiringAngle(double bulletSpeed, double latVelocity) {
 		return Math.asin(latVelocity / bulletSpeed);
+	}
+	
+	@Override
+	public void onScannedRobot(ScannedRobotEvent e) {
+		double bulletPower = Math.min(3.0, robot.getEnergy());
+		double bulletSpeed = (20.0 - 3.0 * bulletPower);
+		double absoluteBearing = robot.getHeadingRadians() + e.getBearingRadians();
+		double latVelocity = e.getVelocity() * Math.sin(e.getHeadingRadians() - absoluteBearing);
+		double angleOffset = Math.asin(latVelocity / bulletSpeed);
 		
+		robot.setTurnGunRightRadians(
+				Utils.normalRelativeAngle(absoluteBearing - robot.getGunHeadingRadians() + angleOffset));
+		robot.setFire(3.0);
 	}
 	
 }
