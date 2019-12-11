@@ -8,6 +8,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+
 public class WaveSurfing extends AbstractMovement {
 
     public void move(){
@@ -75,7 +76,7 @@ public class WaveSurfing extends AbstractMovement {
             turnRadarRightRadians(Double.POSITIVE_INFINITY);
         } while (true);
     }
-
+    @Override
     public void onScannedRobot(ScannedRobotEvent e) {
 
         _myLocation = new Point2D.Double(getX(), getY());
@@ -327,6 +328,8 @@ public class WaveSurfing extends AbstractMovement {
         setBackAsFront(this, goAngle);
     }
 
+
+
     // This can be defined as an inner class if you want.
     class EnemyWave {
         Point2D.Double fireLocation;
@@ -495,7 +498,7 @@ class GFTUtils {
     }
 }
 
-class GFTMovement {
+class  GFTMovement {
     private static final double BATTLE_FIELD_WIDTH = 800;
     private static final double BATTLE_FIELD_HEIGHT = 600;
     private static final double WALL_MARGIN = 18;
