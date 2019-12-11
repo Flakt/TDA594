@@ -1,12 +1,12 @@
 package gun;
 
 import robocode.util.*;
+import robocode.*;
 import java.awt.geom.*;
 
 public class LinearTargetingGun extends AbstractGun {
 	
-	private Double bulletSpeed;
-	private Double latVelocity;
+	private AdvancedRobot robot;
 	
 	public LinearTargetingGun(double bulletSpeed, double latVelocity) {
 		this.bulletSpeed = bulletSpeed;
@@ -14,7 +14,7 @@ public class LinearTargetingGun extends AbstractGun {
 	}
 	
 	/**
-	 * Uses trigonometry as detailed in robocode.net/wiki/Linear_Targeting.
+	 * Uses trigonometry as detailed in robocode.net/wiki/Linear_Targeting to get the firing angle
 	 * 
 	 * @return the firing angle
 	 */
