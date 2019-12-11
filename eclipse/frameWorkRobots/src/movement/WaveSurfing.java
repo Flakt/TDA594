@@ -16,6 +16,8 @@ public class WaveSurfing extends AbstractMovement {
     public void move(){
 
     }
+    private AdvancedRobot robot;
+
     public static int BINS = 47;
     public static double _surfStats[] = new double[BINS]; // we'll use 47 bins
 
@@ -37,8 +39,9 @@ public class WaveSurfing extends AbstractMovement {
 
     private static GFTMovement movement;
 
-    public WaveSurfing() {
+    public WaveSurfing(AdvancedRobot robot) {
         movement = new GFTMovement(this);
+        this.robot = robot;
     }
 
 
