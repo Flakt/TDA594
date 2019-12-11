@@ -6,12 +6,12 @@ import robocode.*;
 import robocode.util.Utils;
 
 public class GFTWave extends Condition {
-	static Point2D targetLocation;
+	public static Point2D targetLocation;
 
-	double bulletPower;
-	Point2D gunLocation;
-	double bearing;
-	double lateralDirection;
+	public double bulletPower;
+	public Point2D gunLocation;
+	public double bearing;
+	public double lateralDirection;
 
 	private static final double MAX_DISTANCE = 900;
 	private static final int DISTANCE_INDEXES = 5;
@@ -27,7 +27,7 @@ public class GFTWave extends Condition {
 	private AdvancedRobot robot;
 	private double distanceTraveled;
 	
-	GFTWave(AdvancedRobot _robot) {
+	public GFTWave(AdvancedRobot _robot) {
 		this.robot = _robot;
 	}
 	
@@ -40,11 +40,11 @@ public class GFTWave extends Condition {
 		return false;
 	}
 
-	double mostVisitedBearingOffset() {
+	public double mostVisitedBearingOffset() {
 		return (lateralDirection * BIN_WIDTH) * (mostVisitedBin() - MIDDLE_BIN);
 	}
 	
-	void setSegmentations(double distance, double velocity, double lastVelocity) {
+	public void setSegmentations(double distance, double velocity, double lastVelocity) {
 		int distanceIndex = Math.min(DISTANCE_INDEXES-1, (int)(distance / (MAX_DISTANCE / DISTANCE_INDEXES)));
 		int velocityIndex = (int)Math.abs(velocity / 2);
 		int lastVelocityIndex = (int)Math.abs(lastVelocity / 2);
