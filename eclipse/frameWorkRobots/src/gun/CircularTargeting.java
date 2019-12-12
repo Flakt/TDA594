@@ -8,23 +8,30 @@ import java.awt.geom.*;
  * */
 public class CircularTargeting extends AbstractGun {
     static double oldEnemyHeading;
+
+    private AdvancedRobot robot;
+
+    public CircularTargeting(AdvancedRobot robot){
+        this.robot = robot;
+    }
+
     @Override
     public void onScannedRobot(ScannedRobotEvent e) {
 
-        double bulletPower = Math.min(3.0,getEnergy());
-        double myX = getX();
-        double myY = getY();
-        double absoluteBearing = getHeadingRadians() + e.getBearingRadians();
-        double enemyX = getX() + e.getDistance() * Math.sin(absoluteBearing);
-        double enemyY = getY() + e.getDistance() * Math.cos(absoluteBearing);
+        double bulletPower = Math.min(3.0,robot.getEnergy());
+        double myX = robot.getX();
+        double myY = robot.getY();
+        double absoluteBearing = robot.getHeadingRadians() + e.getBearingRadians();
+        double enemyX = robot.getX() + e.getDistance() * Math.sin(absoluteBearing);
+        double enemyY = robot.getY() + e.getDistance() * Math.cos(absoluteBearing);
         double enemyHeading = e.getHeadingRadians();
         double enemyHeadingChange = enemyHeading - oldEnemyHeading;
         double enemyVelocity = e.getVelocity();
         oldEnemyHeading = enemyHeading;
 
         double deltaTime = 0;
-        double battleFieldHeight = getBattleFieldHeight(),
-                battleFieldWidth = getBattleFieldWidth();
+        double battleFieldHeight = robot.getBattleFieldHeight(),
+                battleFieldWidth = robot.getBattleFieldWidth();
         double predictedX = enemyX, predictedY = enemyY;
         while((++deltaTime) * (20.0 - 3.0 * bulletPower) <
                 Point2D.Double.distance(myX, myY, predictedX, predictedY)){
@@ -44,13 +51,13 @@ public class CircularTargeting extends AbstractGun {
             }
         }
         double theta = Utils.normalAbsoluteAngle(Math.atan2(
-                predictedX - getX(), predictedY - getY()));
+                predictedX - robot.getX(), predictedY - robot.getY()));
 
-        setTurnRadarRightRadians(Utils.normalRelativeAngle(
-                absoluteBearing - getRadarHeadingRadians()));
-        setTurnGunRightRadians(Utils.normalRelativeAngle(
-                theta - getGunHeadingRadians()));
-        fire(3);
+        robot.setTurnRadarRightRadians(Utils.normalRelativeAngle(
+                absoluteBearing - robot.getRadarHeadingRadians()));
+        robot.setTurnGunRightRadians(Utils.normalRelativeAngle(
+                theta - robot.getGunHeadingRadians()));
+        robot.fire(3);
 
     }
 }
