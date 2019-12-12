@@ -2,6 +2,7 @@ package movement;
 
 import robocode.*;
 import robocode.util.Utils;
+import robots.ConfigurationManager;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -83,7 +84,9 @@ public class WaveSurfing extends AbstractMovement {
         double lateralVelocity = getVelocity()*Math.sin(e.getBearingRadians());
         double absBearing = e.getBearingRadians() + getHeadingRadians();
 
-        setTurnRadarRightRadians(Utils.normalRelativeAngle(absBearing - getRadarHeadingRadians()) * 2);
+        if(ConfigurationManager.getInstance().getProperty("InfinityLock")) {
+            setTurnRadarRightRadians(Utils.normalRelativeAngle(absBearing - getRadarHeadingRadians()) * 2);
+        }
 
         _surfDirections.add(0,
                 new Integer((lateralVelocity >= 0) ? 1 : -1));

@@ -5,8 +5,6 @@ import robots.ConfigurationManager;
 
 public abstract class AbstractMovement extends AdvancedRobot{
 
-    public abstract void onScannedRobot(ScannedRobotEvent e);
-
     public static AbstractMovement getMovement (AdvancedRobot robot) {
         if(ConfigurationManager.getInstance().getProperty("WaveSurfing")) {
             System.out.println("WaveSurfing");
@@ -27,5 +25,13 @@ public abstract class AbstractMovement extends AdvancedRobot{
 
 
         return null;
+    }
+
+    public void run(){
+        //Do Nothing if not implemented
+    }
+
+    public void onScannedRobot(ScannedRobotEvent e){
+        //Do nothing if not implemented
     }
 }
