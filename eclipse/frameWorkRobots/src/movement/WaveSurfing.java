@@ -63,8 +63,6 @@ public class WaveSurfing extends AbstractMovement {
 
     public void run() {
 
-        setColors(Color.BLUE, Color.BLACK, Color.YELLOW);
-
         lateralDirection = 1;
         lastEnemyVelocity = 0;
 
@@ -118,50 +116,10 @@ public class WaveSurfing extends AbstractMovement {
 
         updateWaves();
         doSurfing();
-
-        double enemyAbsoluteBearing = getHeadingRadians() + e.getBearingRadians();
-        double enemyDistance = e.getDistance();
-        double enemyVelocity = e.getVelocity();
-        if (enemyVelocity != 0) {
-            lateralDirection = GFTUtils.sign(enemyVelocity * Math.sin(e.getHeadingRadians() - enemyAbsoluteBearing));
-        }
-        GFTWave wave = new GFTWave(this);
-        wave.gunLocation = new Point2D.Double(getX(), getY());
-        GFTWave.targetLocation = GFTUtils.project(wave.gunLocation, enemyAbsoluteBearing, enemyDistance);
-        wave.lateralDirection = lateralDirection;
-        wave.bulletPower = BULLET_POWER;
-        wave.setSegmentations(enemyDistance, enemyVelocity, lastEnemyVelocity);
-        lastEnemyVelocity = enemyVelocity;
-        wave.bearing = enemyAbsoluteBearing;
-        setTurnGunRightRadians(Utils.normalRelativeAngle(enemyAbsoluteBearing - getGunHeadingRadians() + wave.mostVisitedBearingOffset()));
-        setFire(wave.bulletPower);
-        if (getEnergy() >= BULLET_POWER) {
-            addCustomEvent(wave);
-        }
-
-        movement.onScannedRobot(e);
-        setTurnRadarRightRadians(Utils.normalRelativeAngle(enemyAbsoluteBearing - getRadarHeadingRadians()) * 2);
     }
 
 
-    public void onPaint(java.awt.Graphics2D g) {
-        g.setColor(java.awt.Color.red);
-        for(int i = 0; i < _enemyWaves.size(); i++){
-            WaveSurfing.EnemyWave w = (WaveSurfing.EnemyWave)(_enemyWaves.get(i));
-            Point2D.Double center = w.fireLocation;
 
-            //int radius = (int)(w.distanceTraveled + w.bulletVelocity);
-            //hack to make waves line up visually, due to execution sequence in robocode engine
-            //use this only if you advance waves in the event handlers (eg. in onScannedRobot())
-            //NB! above hack is now only necessary for robocode versions before 1.4.2
-            //otherwise use:
-            int radius = (int)w.distanceTraveled;
-
-            //Point2D.Double center = w.fireLocation;
-            if(radius - 40 < center.distance(_myLocation))
-                g.drawOval((int)(center.x - radius ), (int)(center.y - radius), radius*2, radius*2);
-        }
-    }
 
 
     public void updateWaves() {
