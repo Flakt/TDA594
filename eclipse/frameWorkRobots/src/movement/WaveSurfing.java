@@ -223,10 +223,7 @@ public class WaveSurfing extends AbstractMovement {
         boolean intercepted = false;
 
         do {
-            moveAngle =
-                    wallSmoothing(predictedPosition, absoluteBearing(surfWave.fireLocation,
-                            predictedPosition) + (direction * (Math.PI/2)), direction)
-                            - predictedHeading;
+            moveAngle = absoluteBearing(surfWave.fireLocation, predictedPosition) + (direction * (Math.PI/2));
             moveDir = 1;
 
             if(Math.cos(moveAngle) < 0) {
@@ -279,9 +276,9 @@ public class WaveSurfing extends AbstractMovement {
 
         double goAngle = absoluteBearing(surfWave.fireLocation, _myLocation);
         if (dangerLeft < dangerRight) {
-            goAngle = wallSmoothing(_myLocation, goAngle - (Math.PI/2), -1);
+            goAngle = goAngle - (Math.PI/2);
         } else {
-            goAngle = wallSmoothing(_myLocation, goAngle + (Math.PI/2), 1);
+            goAngle = goAngle + (Math.PI/2);
         }
 
         setBackAsFront(this, goAngle);
@@ -297,18 +294,6 @@ public class WaveSurfing extends AbstractMovement {
         int direction;
 
         public EnemyWave() { }
-    }
-
-
-    // CREDIT: Iterative WallSmoothing by Kawigi
-    //   - return absolute angle to move at after account for WallSmoothing
-    // robowiki.net?WallSmoothing
-
-    public double wallSmoothing(Point2D.Double botLocation, double angle, int orientation) {
-        while (!_fieldRect.contains(project(botLocation, angle, 160))) {
-            angle += orientation*0.05;
-        }
-        return angle;
     }
 
     // CREDIT: from CassiusClay, by PEZ
