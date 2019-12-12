@@ -1,13 +1,14 @@
 package movement;
-import properties.PropertyManager;
+
 import robocode.*;
+import robots.ConfigurationManager;
 
 public abstract class AbstractMovement extends AdvancedRobot{
 
     public abstract void onScannedRobot(ScannedRobotEvent e);
 
     public static AbstractMovement getMovement (AdvancedRobot robot) {
-        if(PropertyManager.getProperty("WaveSurfing")) {
+        if(ConfigurationManager.getInstance().getProperty("WaveSurfing")) {
             System.out.println("WaveSurfing");
             return new WaveSurfing(robot);
         }
@@ -18,7 +19,7 @@ public abstract class AbstractMovement extends AdvancedRobot{
             return new WallSmoothing(robot);
         }
 */
-        if(PropertyManager.getProperty("RandomOrbitalMovement")) {
+        if(ConfigurationManager.getInstance().getProperty("RandomOrbitalMovement")) {
             System.out.println("RandomOrbitalMovement");
             return new RandomOrbitalMovement(robot);
         }
