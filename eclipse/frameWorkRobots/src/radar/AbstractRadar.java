@@ -4,15 +4,21 @@ import robocode.AdvancedRobot;
 import robocode.ScannedRobotEvent;
 import robots.ConfigurationManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AbstractRadar {
 
-    public static AbstractRadar getRadar(AdvancedRobot robot) {
+    public static List<AbstractRadar> getRadar(AdvancedRobot robot) {
+
+        List<AbstractRadar> radars = new ArrayList<>();
+
         if(ConfigurationManager.getInstance().getProperty("SpinningRadar")) {
             System.out.println("SpinningRadar");
 
-            return new SpinningRadar(robot);
+            radars.add(new SpinningRadar(robot));
         }
-        return null;
+        return radars;
     }
 
     public void run(){

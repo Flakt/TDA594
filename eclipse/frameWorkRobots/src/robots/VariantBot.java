@@ -6,19 +6,23 @@ import radar.AbstractRadar;
 import robocode.AdvancedRobot;
 import robocode.ScannedRobotEvent;
 
+import java.util.List;
+
 public class VariantBot extends AdvancedRobot {
 
-    AbstractGun gun;
-    AbstractMovement movement;
-    AbstractRadar radar;
+    private AbstractGun gun;
+    private AbstractMovement movement;
+    private List<AbstractRadar> radars;
 
 
     public void run(){
         this.gun = AbstractGun.getGun(this);
         this.movement = AbstractMovement.getMovement(this);
-        this.radar = AbstractRadar.getRadar(this);
+        this.radars = AbstractRadar.getRadar(this);
 
-        radar.run();
+        for (AbstractRadar r:radars) {
+            r.run();
+        }
         movement.run();
         if(!gun.equals(null)){
             gun.run();
@@ -27,7 +31,9 @@ public class VariantBot extends AdvancedRobot {
     }
 
     public void onScannedRobot(ScannedRobotEvent e){
-        radar.onScannedRobot(e);
+        for (AbstractRadar r:radars) {
+            r.onScannedRobot(e);
+        }
         movement.onScannedRobot(e);
         if(!gun.equals(null)){
             gun.onScannedRobot(e);
