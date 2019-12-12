@@ -3,6 +3,7 @@ package movement;
 import robocode.*;
 import robocode.util.Utils;
 import robots.ConfigurationManager;
+import utils.EnemyWave;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -96,7 +97,7 @@ public class WaveSurfing extends AbstractMovement {
         double bulletPower = _oppEnergy - e.getEnergy();
         if (bulletPower < 3.01 && bulletPower > 0.09
                 && _surfDirections.size() > 2) {
-            WaveSurfing.EnemyWave ew = new EnemyWave();
+            EnemyWave ew = new EnemyWave();
             ew.fireTime = getTime() - 1;
             ew.bulletVelocity = bulletVelocity(bulletPower);
             ew.distanceTraveled = bulletVelocity(bulletPower);
@@ -123,7 +124,7 @@ public class WaveSurfing extends AbstractMovement {
 
     public void updateWaves() {
         for (int x = 0; x < _enemyWaves.size(); x++) {
-            WaveSurfing.EnemyWave ew = (WaveSurfing.EnemyWave)_enemyWaves.get(x);
+            EnemyWave ew = (EnemyWave)_enemyWaves.get(x);
 
             ew.distanceTraveled = (getTime() - ew.fireTime) * ew.bulletVelocity;
             if (ew.distanceTraveled >
@@ -134,12 +135,12 @@ public class WaveSurfing extends AbstractMovement {
         }
     }
 
-    public WaveSurfing.EnemyWave getClosestSurfableWave() {
+    public EnemyWave getClosestSurfableWave() {
         double closestDistance = 50000; // I juse use some very big number here
-        WaveSurfing.EnemyWave surfWave = null;
+        EnemyWave surfWave = null;
 
         for (int x = 0; x < _enemyWaves.size(); x++) {
-            WaveSurfing.EnemyWave ew = (WaveSurfing.EnemyWave)_enemyWaves.get(x);
+            EnemyWave ew = (EnemyWave)_enemyWaves.get(x);
             double distance = _myLocation.distance(ew.fireLocation)
                     - ew.distanceTraveled;
 
@@ -155,7 +156,7 @@ public class WaveSurfing extends AbstractMovement {
 
     // Given the EnemyWave that the bullet was on, and the point where we
     // were hit, calculate the index into our stat array for that factor.
-    public static int getFactorIndex(WaveSurfing.EnemyWave ew, Point2D.Double targetLocation) {
+    public static int getFactorIndex(EnemyWave ew, Point2D.Double targetLocation) {
         double offsetAngle = (absoluteBearing(ew.fireLocation, targetLocation)
                 - ew.directAngle);
         double factor = Utils.normalRelativeAngle(offsetAngle)
@@ -169,7 +170,7 @@ public class WaveSurfing extends AbstractMovement {
 
     // Given the EnemyWave that the bullet was on, and the point where we
     // were hit, update our stat array to reflect the danger in that area.
-    public void logHit(WaveSurfing.EnemyWave ew, Point2D.Double targetLocation) {
+    public void logHit(EnemyWave ew, Point2D.Double targetLocation) {
         int index = getFactorIndex(ew, targetLocation);
 
         for (int x = 0; x < BINS; x++) {
@@ -188,11 +189,11 @@ public class WaveSurfing extends AbstractMovement {
         if (!_enemyWaves.isEmpty()) {
             Point2D.Double hitBulletLocation = new Point2D.Double(
                     e.getBullet().getX(), e.getBullet().getY());
-            WaveSurfing.EnemyWave hitWave = null;
+            EnemyWave hitWave = null;
 
             // look through the EnemyWaves, and find one that could've hit us.
             for (int x = 0; x < _enemyWaves.size(); x++) {
-                WaveSurfing.EnemyWave ew = (WaveSurfing.EnemyWave)_enemyWaves.get(x);
+                EnemyWave ew = (EnemyWave)_enemyWaves.get(x);
 
                 if (Math.abs(ew.distanceTraveled -
                         _myLocation.distance(ew.fireLocation)) < 50
@@ -216,7 +217,7 @@ public class WaveSurfing extends AbstractMovement {
 
     // CREDIT: mini sized predictor from Apollon, by rozu
     // http://robowiki.net?Apollon
-    public Point2D.Double predictPosition(WaveSurfing.EnemyWave surfWave, int direction) {
+    public Point2D.Double predictPosition(EnemyWave surfWave, int direction) {
         Point2D.Double predictedPosition = (Point2D.Double)_myLocation.clone();
         double predictedVelocity = getVelocity();
         double predictedHeading = getHeadingRadians();
@@ -262,7 +263,7 @@ public class WaveSurfing extends AbstractMovement {
         return predictedPosition;
     }
 
-    public double checkDanger(WaveSurfing.EnemyWave surfWave, int direction) {
+    public double checkDanger(EnemyWave surfWave, int direction) {
         int index = getFactorIndex(surfWave,
                 predictPosition(surfWave, direction));
 
@@ -270,7 +271,7 @@ public class WaveSurfing extends AbstractMovement {
     }
 
     public void doSurfing() {
-        WaveSurfing.EnemyWave surfWave = getClosestSurfableWave();
+        EnemyWave surfWave = getClosestSurfableWave();
 
         if (surfWave == null) { return; }
 
@@ -285,18 +286,6 @@ public class WaveSurfing extends AbstractMovement {
         }
 
         setBackAsFront(this, goAngle);
-    }
-
-
-
-    // This can be defined as an inner class if you want.
-    class EnemyWave {
-        Point2D.Double fireLocation;
-        long fireTime;
-        double bulletVelocity, directAngle, distanceTraveled;
-        int direction;
-
-        public EnemyWave() { }
     }
 
     // CREDIT: from CassiusClay, by PEZ
