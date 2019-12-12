@@ -17,12 +17,12 @@ public abstract class AbstractMovement extends AdvancedRobot{
             System.out.println("WallSmoothing");
             return new WallSmoothing(robot);
         }
-
+*/
         if(PropertyManager.getProperty("RandomOrbitalMovement")) {
             System.out.println("RandomOrbitalMovement");
             return new RandomOrbitalMovement(robot);
         }
-        */
+
 
         return null;
     }
