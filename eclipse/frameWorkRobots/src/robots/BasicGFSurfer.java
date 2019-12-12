@@ -1,3 +1,5 @@
+package robots;
+
 import robocode.*;
 import robocode.util.Utils;
 import java.awt.geom.*;     // for Point2D's
@@ -15,7 +17,7 @@ import java.awt.Color;
  *   1.01 - solved bug in distance-bin calculation when distance > 900
  *   1.02 - fixed wave mismatching caused by rounding errors
  */
-
+/*
 public class BasicGFSurfer extends AdvancedRobot {
 	
 	
@@ -544,3 +546,4 @@ class GFTMovement {
 		robot.setTurnRightRadians(Math.tan(angle));
 	}
 }
+*/

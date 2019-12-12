@@ -1,9 +1,10 @@
 package gun;
 
-import properties.PropertyManager;
-import robocode.*;
+import robots.ConfigurationManager;
+import robocode.AdvancedRobot;
+import robocode.ScannedRobotEvent;
 
-public abstract class AbstractGun extends AdvancedRobot {
+public abstract class AbstractGun {
 	public void onScannedRobot(ScannedRobotEvent e) {
 		
 	}
@@ -16,7 +17,7 @@ public abstract class AbstractGun extends AdvancedRobot {
 		}
 		 */
 
-		if(PropertyManager.getProperty("LinearTargeting")) {
+		if(ConfigurationManager.getInstance().getProperty("LinearTargeting")) {
 			System.out.println("LinearTargeting");
 			return new LinearTargetingGun(robot);
 		}

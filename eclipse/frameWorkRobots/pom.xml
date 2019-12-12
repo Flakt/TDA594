@@ -20,7 +20,37 @@
         <configuration>
           <release>12</release>
         </configuration>
+        </plugin>	
+	<plugin>
+        <groupId>com.coderplus.maven.plugins</groupId>
+        <artifactId>copy-rename-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <id>copy-file</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <sourceFile>runtime.properties</sourceFile>
+              <destinationFile>src/robots/runtime.properties</destinationFile>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+      <dependencies>
+    	 <dependency>
+  			<groupId>net.sf.robocode</groupId>
+  			<artifactId>robocode.api</artifactId>
+  			<version>1.9.2.1</version>
+  		 </dependency>
+  		<dependency>
+  			<groupId>junit</groupId>
+  			<artifactId>junit</artifactId>
+  			<version>4.12</version>
+  		</dependency>
+    </dependencies>
 </project>
