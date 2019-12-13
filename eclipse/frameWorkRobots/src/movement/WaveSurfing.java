@@ -69,24 +69,24 @@ public class WaveSurfing extends MovementState {
         _surfAbsBearings = new ArrayList();
 
 
-        setAdjustGunForRobotTurn(true);
-        setAdjustRadarForGunTurn(true);
+        robot.setAdjustGunForRobotTurn(true);
+        robot.setAdjustRadarForGunTurn(true);
 
         do {
             // basic mini-radar code
-            turnRadarRightRadians(Double.POSITIVE_INFINITY);
+        	robot.turnRadarRightRadians(Double.POSITIVE_INFINITY);
         } while (true);
     }
     @Override
     public void onScannedRobot(ScannedRobotEvent e) {
 
-        _myLocation = new Point2D.Double(getX(), getY());
+        _myLocation = new Point2D.Double(robot.getX(), robot.getY());
 
-        double lateralVelocity = getVelocity()*Math.sin(e.getBearingRadians());
-        double absBearing = e.getBearingRadians() + getHeadingRadians();
+        double lateralVelocity = robot.getVelocity()*Math.sin(e.getBearingRadians());
+        double absBearing = e.getBearingRadians() + robot.getHeadingRadians();
 
         if(ConfigurationManager.getInstance().getProperty("InfinityLock")) {
-            setTurnRadarRightRadians(Utils.normalRelativeAngle(absBearing - getRadarHeadingRadians()) * 2);
+        	robot.setTurnRadarRightRadians(Utils.normalRelativeAngle(absBearing - robot.getRadarHeadingRadians()) * 2);
         }
 
         _surfDirections.add(0,
@@ -98,7 +98,7 @@ public class WaveSurfing extends MovementState {
         if (bulletPower < 3.01 && bulletPower > 0.09
                 && _surfDirections.size() > 2) {
             EnemyWave ew = new EnemyWave();
-            ew.fireTime = getTime() - 1;
+            ew.fireTime = robot.getTime() - 1;
             ew.bulletVelocity = bulletVelocity(bulletPower);
             ew.distanceTraveled = bulletVelocity(bulletPower);
             ew.direction = ((Integer)_surfDirections.get(2)).intValue();
@@ -126,7 +126,7 @@ public class WaveSurfing extends MovementState {
         for (int x = 0; x < _enemyWaves.size(); x++) {
             EnemyWave ew = (EnemyWave)_enemyWaves.get(x);
 
-            ew.distanceTraveled = (getTime() - ew.fireTime) * ew.bulletVelocity;
+            ew.distanceTraveled = (robot.getTime() - ew.fireTime) * ew.bulletVelocity;
             if (ew.distanceTraveled >
                     _myLocation.distance(ew.fireLocation) + 50) {
                 _enemyWaves.remove(x);
@@ -219,8 +219,8 @@ public class WaveSurfing extends MovementState {
     // http://robowiki.net?Apollon
     public Point2D.Double predictPosition(EnemyWave surfWave, int direction) {
         Point2D.Double predictedPosition = (Point2D.Double)_myLocation.clone();
-        double predictedVelocity = getVelocity();
-        double predictedHeading = getHeadingRadians();
+        double predictedVelocity = robot.getVelocity();
+        double predictedHeading = robot.getHeadingRadians();
         double maxTurning, moveAngle, moveDir;
 
         int counter = 0; // number of ticks in the future
@@ -285,7 +285,7 @@ public class WaveSurfing extends MovementState {
             goAngle = goAngle + (Math.PI/2);
         }
 
-        setBackAsFront(this, goAngle);
+        setBackAsFront(robot, goAngle);
     }
 
     // CREDIT: from CassiusClay, by PEZ
