@@ -2,9 +2,8 @@ package gun;
 
 import robocode.util.*;
 import robocode.*;
-import java.awt.geom.*;
 
-public class LinearTargetingGun extends AbstractGun {
+public class LinearTargetingGun extends GunState {
 	
 	private AdvancedRobot robot;
 	
