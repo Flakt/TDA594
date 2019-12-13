@@ -6,7 +6,7 @@ import utils.GFTWave;
 
 import java.awt.geom.Point2D;
 
-public class GuessFactorTargeting extends AbstractGun {
+public class GuessFactorTargeting extends GunState {
     private static final double BULLET_POWER = 1.9;
     private static double lateralDirection;
     private static double lastEnemyVelocity;

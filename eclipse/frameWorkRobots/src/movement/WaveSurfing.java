@@ -10,7 +10,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 
-public class WaveSurfing extends AbstractMovement {
+public class WaveSurfing extends MovementState {
 
     public void move(){
 

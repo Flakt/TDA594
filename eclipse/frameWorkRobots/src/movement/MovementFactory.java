@@ -5,7 +5,7 @@ import robots.ConfigurationManager;
 
 public class MovementFactory {
 
-    public static AbstractMovement getMovement (AdvancedRobot robot) {
+    public static MovementState getMovement (AdvancedRobot robot) {
         if(ConfigurationManager.getInstance().getProperty("WaveSurfing")) {
             System.out.println("WaveSurfing");
 

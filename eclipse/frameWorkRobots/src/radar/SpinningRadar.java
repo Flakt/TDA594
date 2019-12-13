@@ -2,7 +2,7 @@ package radar;
 
 import robocode.AdvancedRobot;
 
-public class SpinningRadar extends AbstractRadar {
+public class SpinningRadar extends RadarState {
 
     private AdvancedRobot robot;
 

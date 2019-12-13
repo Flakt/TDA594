@@ -1,24 +1,24 @@
 package robots;
 
-import gun.AbstractGun;
+import gun.GunState;
 import gun.GunFactory;
-import movement.AbstractMovement;
+import movement.MovementState;
 import movement.MovementFactory;
-import radar.AbstractRadar;
+import radar.RadarState;
 import radar.RadarFactory;
 import robocode.AdvancedRobot;
 import robocode.ScannedRobotEvent;
-import visual.AbstractVisual;
+import visual.VisualState;
 import visual.VisualFactory;
 
 import java.util.List;
 
 public class VariantBot extends AdvancedRobot {
 
-    private AbstractGun gun;
-    private AbstractMovement movement;
-    private List<AbstractRadar> radars;
-    private List<AbstractVisual> visuals;
+    private GunState gun;
+    private MovementState movement;
+    private List<RadarState> radars;
+    private List<VisualState> visuals;
 
 
     public void run(){
@@ -27,11 +27,11 @@ public class VariantBot extends AdvancedRobot {
         this.radars = RadarFactory.getRadar(this);
         this.visuals = VisualFactory.getRadar(this);
 
-        for (AbstractVisual v:visuals) {
+        for (VisualState v:visuals) {
             v.run();
         }
 
-        for (AbstractRadar r:radars) {
+        for (RadarState r:radars) {
             r.run();
         }
         movement.run();
@@ -42,10 +42,10 @@ public class VariantBot extends AdvancedRobot {
     }
 
     public void onScannedRobot(ScannedRobotEvent e){
-        for (AbstractVisual v:visuals) {
+        for (VisualState v:visuals) {
             v.onScannedRobot(e);
         }
-        for (AbstractRadar r:radars) {
+        for (RadarState r:radars) {
             r.onScannedRobot(e);
         }
         movement.onScannedRobot(e);
@@ -55,7 +55,7 @@ public class VariantBot extends AdvancedRobot {
     	   
     }
 
-    public AbstractMovement getMovement(){
+    public MovementState getMovement(){
         return movement;
     }
 

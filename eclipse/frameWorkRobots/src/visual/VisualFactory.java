@@ -8,9 +8,9 @@ import java.util.List;
 
 public class VisualFactory {
 
-    public static List<AbstractVisual> getRadar(AdvancedRobot robot) {
+    public static List<VisualState> getRadar(AdvancedRobot robot) {
 
-        List<AbstractVisual> visuals = new ArrayList<>();
+        List<VisualState> visuals = new ArrayList<>();
 
         if(ConfigurationManager.getInstance().getProperty("PaintWaves")) {
             System.out.println("PaintWaves");
