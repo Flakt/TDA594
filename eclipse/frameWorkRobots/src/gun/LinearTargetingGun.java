@@ -3,17 +3,16 @@ package gun;
 import robocode.util.*;
 import robocode.*;
 import java.awt.geom.*;
-
+/**
+ * A noniterative linear targeting implementation inspired by example given in robocode wiki
+ *
+ */
 public class LinearTargetingGun extends AbstractGun {
 	
 	private AdvancedRobot robot;
 	
 	public LinearTargetingGun(AdvancedRobot robot) {
 		this.robot = robot;
-	}
-	
-	private Double calcFiringAngle(double bulletSpeed, double latVelocity) {
-		return Math.asin(latVelocity / bulletSpeed);
 	}
 	
 	@Override
