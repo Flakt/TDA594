@@ -6,7 +6,7 @@ import java.awt.geom.*;
 /**
  * Code gathered in pieces from http://robowiki.net/wiki/Circular_Targeting. Credit goes to Dummy.
  * */
-public class CircularTargeting extends AbstractGun {
+public class CircularTargeting extends GunState {
     static double oldEnemyHeading;
 
     private AdvancedRobot robot;

@@ -8,9 +8,9 @@ import java.util.List;
 
 public class RadarFactory {
 
-    public static List<AbstractRadar> getRadar(AdvancedRobot robot) {
+    public static List<RadarState> getRadar(AdvancedRobot robot) {
 
-        List<AbstractRadar> radars = new ArrayList<>();
+        List<RadarState> radars = new ArrayList<>();
 
         if(ConfigurationManager.getInstance().getProperty("SpinningRadar")) {
             System.out.println("SpinningRadar");

@@ -8,7 +8,7 @@ import utils.GFTUtils;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class RandomOrbitalMovement extends AbstractMovement {
+public class RandomOrbitalMovement extends MovementState {
 
     private static final double BATTLE_FIELD_WIDTH = 800;
     private static final double BATTLE_FIELD_HEIGHT = 600;

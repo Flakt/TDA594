@@ -7,7 +7,7 @@ import robots.ConfigurationManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractRadar {
+public abstract class RadarState {
 
     public void run(){
         //Do Nothing if not implemented

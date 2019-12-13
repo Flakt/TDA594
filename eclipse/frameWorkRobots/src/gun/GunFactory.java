@@ -5,7 +5,7 @@ import robots.ConfigurationManager;
 
 public class GunFactory {
 
-    public static AbstractGun getGun(AdvancedRobot robot) {
+    public static GunState getGun(AdvancedRobot robot) {
 
         if(ConfigurationManager.getInstance().getProperty("GuessFactorTargeting")) {
             System.out.println("GuessFactorTargeting");

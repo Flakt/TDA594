@@ -1,9 +1,13 @@
-package movement;
+package visual;
 
-import robocode.*;
+import robocode.AdvancedRobot;
+import robocode.ScannedRobotEvent;
 import robots.ConfigurationManager;
 
-public abstract class AbstractMovement extends AdvancedRobot{
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class VisualState {
 
     public void run(){
         //Do Nothing if not implemented
@@ -12,4 +16,5 @@ public abstract class AbstractMovement extends AdvancedRobot{
     public void onScannedRobot(ScannedRobotEvent e){
         //Do nothing if not implemented
     }
+
 }

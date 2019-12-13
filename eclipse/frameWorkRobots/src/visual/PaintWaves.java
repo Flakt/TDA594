@@ -7,7 +7,7 @@ import utils.EnemyWave;
 
 import java.awt.geom.Point2D;
 
-public class PaintWaves extends AbstractVisual {
+public class PaintWaves extends VisualState {
 
     private WaveSurfing ws;
 
