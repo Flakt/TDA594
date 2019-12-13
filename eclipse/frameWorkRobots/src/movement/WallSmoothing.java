@@ -2,6 +2,7 @@ package movement;
 
 import robocode.AdvancedRobot;
 import robocode.util.Utils;
+import utils.EnemyWave;
 
 import java.awt.geom.Point2D;
 
@@ -26,7 +27,7 @@ public class WallSmoothing extends WaveSurfing {
 
     @Override
     public void doSurfing() {
-        WaveSurfing.EnemyWave surfWave = getClosestSurfableWave();
+        EnemyWave surfWave = getClosestSurfableWave();
 
         if (surfWave == null) { return; }
 
@@ -46,7 +47,7 @@ public class WallSmoothing extends WaveSurfing {
     @Override
     // CREDIT: mini sized predictor from Apollon, by rozu
     // http://robowiki.net?Apollon
-    public Point2D.Double predictPosition(WaveSurfing.EnemyWave surfWave, int direction) {
+    public Point2D.Double predictPosition(EnemyWave surfWave, int direction) {
         Point2D.Double predictedPosition = (Point2D.Double)_myLocation.clone();
         double predictedVelocity = getVelocity();
         double predictedHeading = getHeadingRadians();
