@@ -9,18 +9,6 @@ import java.util.List;
 
 public class AbstractRadar {
 
-    public static List<AbstractRadar> getRadar(AdvancedRobot robot) {
-
-        List<AbstractRadar> radars = new ArrayList<>();
-
-        if(ConfigurationManager.getInstance().getProperty("SpinningRadar")) {
-            System.out.println("SpinningRadar");
-
-            radars.add(new SpinningRadar(robot));
-        }
-        return radars;
-    }
-
     public void run(){
         //Do Nothing if not implemented
     }
