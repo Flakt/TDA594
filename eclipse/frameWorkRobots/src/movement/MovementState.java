@@ -3,7 +3,7 @@ package movement;
 import robocode.*;
 import robots.ConfigurationManager;
 
-public abstract class MovementState extends AdvancedRobot{
+public abstract class MovementState{
 
     public void run(){
         //Do Nothing if not implemented

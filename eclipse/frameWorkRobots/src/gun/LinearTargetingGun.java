@@ -7,7 +7,8 @@ import java.awt.geom.*;
  * A noniterative linear targeting implementation inspired by example given in robocode wiki
  *
  */
-public class LinearTargetingGun extends AbstractGun {
+
+public class LinearTargetingGun extends GunState {
 	
 	private AdvancedRobot robot;
 	
