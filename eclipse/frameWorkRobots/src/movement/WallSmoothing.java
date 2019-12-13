@@ -41,7 +41,7 @@ public class WallSmoothing extends WaveSurfing {
             goAngle = wallSmoothing(_myLocation, goAngle + (Math.PI/2), 1);
         }
 
-        setBackAsFront(this, goAngle);
+        setBackAsFront(robot, goAngle);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class WallSmoothing extends WaveSurfing {
     // http://robowiki.net?Apollon
     public Point2D.Double predictPosition(EnemyWave surfWave, int direction) {
         Point2D.Double predictedPosition = (Point2D.Double)_myLocation.clone();
-        double predictedVelocity = getVelocity();
-        double predictedHeading = getHeadingRadians();
+        double predictedVelocity = robot.getVelocity();
+        double predictedHeading = robot.getHeadingRadians();
         double maxTurning, moveAngle, moveDir;
 
         int counter = 0; // number of ticks in the future

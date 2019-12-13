@@ -30,13 +30,12 @@ public class VariantBot extends AdvancedRobot {
         for (VisualState v:visuals) {
             v.run();
         }
-
-        for (RadarState r:radars) {
-            r.run();
-        }
         movement.run();
         if(!gun.equals(null)){
             gun.run();
+        }
+        for (RadarState r:radars) {
+            r.run();
         }
 
     }

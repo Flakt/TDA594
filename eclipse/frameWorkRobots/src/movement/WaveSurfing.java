@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 public class WaveSurfing extends MovementState {
 
-    public void move(){
-
-    }
     private AdvancedRobot robot;
 
     public static int BINS = 47;
@@ -34,9 +31,6 @@ public class WaveSurfing extends MovementState {
 
     private static double lateralDirection;
     private static double lastEnemyVelocity;
-
-
-    private static RandomOrbitalMovement movement;
 
     public WaveSurfing(AdvancedRobot robot) {
         this.robot = robot;
@@ -69,14 +63,10 @@ public class WaveSurfing extends MovementState {
         _surfAbsBearings = new ArrayList();
 
 
-        robot.setAdjustGunForRobotTurn(true);
-        robot.setAdjustRadarForGunTurn(true);
-
-        do {
-            // basic mini-radar code
-        	robot.turnRadarRightRadians(Double.POSITIVE_INFINITY);
-        } while (true);
+        //robot.setAdjustGunForRobotTurn(true);
+        //robot.setAdjustRadarForGunTurn(true);
     }
+    
     @Override
     public void onScannedRobot(ScannedRobotEvent e) {
 
