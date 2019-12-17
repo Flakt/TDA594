@@ -58,4 +58,13 @@ public class VariantBot extends AdvancedRobot {
         return movement;
     }
 
+
+    //For testing purposes
+    public VariantBot(){
+        run();
+    }
+
+    public void setGun(GunState gun) {
+        this.gun = gun;
+    }
 }
