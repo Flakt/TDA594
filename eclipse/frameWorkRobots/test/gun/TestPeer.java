@@ -15,6 +15,12 @@ public class TestPeer implements IAdvancedRobotPeer {
     private double x = 10;
     private double y = 10;
 
+    public TestPeer(){ }
+
+    public TestPeer(double energy){
+        this.energy = energy;
+    }
+
     @Override
     public boolean isAdjustGunForBodyTurn() {
         return false;
