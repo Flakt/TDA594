@@ -11,14 +11,15 @@ import robocode.ScannedRobotEvent;
 import visual.VisualState;
 import visual.VisualFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VariantBot extends AdvancedRobot {
 
     private GunState gun;
     private MovementState movement;
-    private List<RadarState> radars;
-    private List<VisualState> visuals;
+    private List<RadarState> radars = new ArrayList<>();
+    private List<VisualState> visuals = new ArrayList<>();
 
 
     public void run(){
@@ -30,8 +31,10 @@ public class VariantBot extends AdvancedRobot {
         for (VisualState v:visuals) {
             v.run();
         }
-        movement.run();
-        if(!gun.equals(null)){
+        if(movement != null){
+            movement.run();
+        }
+        if(gun != null){
             gun.run();
         }
         for (RadarState r:radars) {
@@ -47,8 +50,10 @@ public class VariantBot extends AdvancedRobot {
         for (RadarState r:radars) {
             r.onScannedRobot(e);
         }
-        movement.onScannedRobot(e);
-        if(!gun.equals(null)){
+        if(movement != null ){
+            movement.onScannedRobot(e);
+        }
+        if(gun != null){
             gun.onScannedRobot(e);
         }
     	   
@@ -58,4 +63,12 @@ public class VariantBot extends AdvancedRobot {
         return movement;
     }
 
+
+    //For testing purposes
+    public VariantBot(){
+    }
+
+    public void setGun(GunState gun) {
+        this.gun = gun;
+    }
 }
