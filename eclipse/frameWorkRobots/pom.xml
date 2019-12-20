@@ -83,7 +83,6 @@
   			<groupId>org.evosuite</groupId>
   			<artifactId>evosuite-standalone-runtime</artifactId>
   			<version>1.0.6</version>
-  			<scope>test</scope>
   		</dependency>
     </dependencies>
 </project>
