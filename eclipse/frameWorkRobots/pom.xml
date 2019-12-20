@@ -18,7 +18,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <release>12</release>
+            <source>1.8</source>
+            <target>1.8</target>
         </configuration>
         </plugin>	
 	<plugin>
@@ -39,6 +40,32 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+      	<groupId>org.evosuite.plugins</groupId>
+      	<artifactId>evosuite-maven-plugin</artifactId>
+      	<version>1.0.6</version>
+      	<executions>
+      		<execution>
+      			<goals>
+      				<goal> prepare </goal>
+      			</goals>
+      			<phase> process-test-classes </phase>
+      		</execution>
+      	</executions>
+      </plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-surefire-plugin</artifactId>
+      	<version>3.0.0-M4</version>
+      	<configuration>
+      		<properties>
+      			<property>
+      				<name>listener</name>
+      				<value>org.evosuite.runtime.InitializingListener</value>
+      			</property>
+      		</properties>
+      	</configuration>
+      </plugin>
     </plugins>
   </build>
       <dependencies>
@@ -51,6 +78,12 @@
   			<groupId>junit</groupId>
   			<artifactId>junit</artifactId>
   			<version>4.12</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.evosuite</groupId>
+  			<artifactId>evosuite-standalone-runtime</artifactId>
+  			<version>1.0.6</version>
+  			<scope>test</scope>
   		</dependency>
     </dependencies>
 </project>
