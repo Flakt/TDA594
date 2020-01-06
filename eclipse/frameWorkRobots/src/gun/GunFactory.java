@@ -19,7 +19,7 @@ public class GunFactory {
 
         if(ConfigurationManager.getInstance().getProperty("LinearTargeting")) {
             System.out.println("LinearTargeting");
-            return new LinearTargetingGun(robot);
+            return new LinearTargeting(robot);
         }
 
         return null;

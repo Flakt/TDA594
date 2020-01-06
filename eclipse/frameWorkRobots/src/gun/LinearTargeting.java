@@ -8,11 +8,11 @@ import java.awt.geom.*;
  *
  */
 
-public class LinearTargetingGun extends GunState {
+public class LinearTargeting extends GunState {
 	
 	private AdvancedRobot robot;
 	
-	public LinearTargetingGun(AdvancedRobot robot) {
+	public LinearTargeting(AdvancedRobot robot) {
 		this.robot = robot;
 	}
 	
