@@ -11,12 +11,12 @@
 	</properties>
 	<struct>
 		<and abstract="true" mandatory="true" name="Robot">
-			<or abstract="true" mandatory="true" name="Movement">
+			<alt abstract="true" mandatory="true" name="Movement">
 				<and name="WaveSurfing">
 					<feature name="WallSmoothing"/>
 				</and>
 				<feature name="RandomOrbitalMovement"/>
-			</or>
+			</alt>
 			<alt abstract="true" name="Targeting">
 				<feature name="GuessFactorTargeting"/>
 				<feature name="LinearTargeting"/>
@@ -37,14 +37,6 @@
 			<imp>
 				<var>PaintWaves</var>
 				<var>WaveSurfing</var>
-			</imp>
-		</rule>
-		<rule>
-			<imp>
-				<var>RandomOrbitalMovement</var>
-				<not>
-					<var>WaveSurfing</var>
-				</not>
 			</imp>
 		</rule>
 	</constraints>
