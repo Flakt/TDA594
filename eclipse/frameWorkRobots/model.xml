@@ -39,5 +39,11 @@
 				<var>WaveSurfing</var>
 			</imp>
 		</rule>
+		<rule>
+			<imp>
+				<var>InfinityLock</var>
+				<var>WaveSurfing</var>
+			</imp>
+		</rule>
 	</constraints>
 </featureModel>
