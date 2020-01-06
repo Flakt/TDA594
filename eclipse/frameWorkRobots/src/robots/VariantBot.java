@@ -71,4 +71,5 @@ public class VariantBot extends AdvancedRobot {
     public void setGun(GunState gun) {
         this.gun = gun;
     }
+    public void setMovement (MovementState movement){this.movement=movement;}
 }
